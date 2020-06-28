@@ -700,6 +700,7 @@ void printHelp() {
 	cout << "\t--clear-saved\t\tUse to reset the on disk cache" << endl;
 	cout << "\t--large-mem\t\tUse when clues > 0 to help cache additional calculations. Uses a lot of memory." << endl;
 	cout << "\t--no-range\t\tProgram iterates all 0..focus and 0..spell combinations. This turns that off." << endl;
+	cout << "\t--scenarios <n>\t\tPerform calculations for the first n scenarios." << endl;
 	cout << "\t--help\t\t\tThis print out." << endl;
 	cout << endl << "Following example is equivalent to default ./eldersign" << endl;
 	cout << "./eldersign --focus 0 --spell 0 --clue 0 --in-file cards.csv --num-threads 1" << endl;
@@ -773,7 +774,7 @@ int main(int argc, char** argv) {
 		else if (flag == "--clue" && argIdx < argc) {
 			maxClue = stoi(argv[argIdx++]);
 		}
-		else if (flag == "--cols" && argIdx < argc) {
+		else if (flag == "--scenarios" && argIdx < argc) {
 			numCols = stoi(argv[argIdx++]);
 		}
 		else if (flag == "--large-mem") {
@@ -806,15 +807,10 @@ int main(int argc, char** argv) {
 	}
 	
 	saved = unordered_map<string, double>();
-
 	if (savedEnabled) {
 		readInSaved(clearSaved);
 	}
-
-	string name;
-	vector<vector<int>> tasks = vector<vector<int>>();
-	bool inOrder;
-
+	cout << "Card Title#Tasks#Focus#Spell#Clue#5G#6G#6G+Y#6G+R#6G+YR#6G+YRW";
 	if (taskStr != "") {
 		runTask("OneOff", taskStr, maxFocus, maxSpell, maxClue, noRange, numCols);
 	}
@@ -822,6 +818,7 @@ int main(int argc, char** argv) {
 		io::CSVReader<3, io::trim_chars<' '>, io::double_quote_escape<',', '\"'>> in(filename);
 		in.read_header(io::ignore_extra_column, "Expansion", "Name", "Tasks");
 		string expansion;
+		string name;
 
 		while (in.read_row(expansion, name, taskStr)) {
 			runTask(name, taskStr, maxFocus, maxSpell, maxClue, noRange, numCols);
