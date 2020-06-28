@@ -47,7 +47,9 @@ A few examples for running one-off tasks
 
 Note: Running with `clue > 0` will take a **very long time** the more dice used, so it's best not to run the last two scenarios.  Use the following command to impose a limit.
 
-```./eldersign --clue 1 --task TERROR\|PERIL,SCROLL,SCROLL --num-threads 4 --disable-saved --large-mem --scenarios 4```
+```
+./eldersign --clue 1 --task TERROR\|PERIL,SCROLL,SCROLL --num-threads 4 --disable-saved --large-mem --scenarios 4
+```
 
 Output will look like
 
