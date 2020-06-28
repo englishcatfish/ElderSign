@@ -31,6 +31,7 @@ Flags:
         --clear-saved           Use to reset the on disk cache
         --large-mem             Use when clues > 0 to help cache additional calculations. Uses a lot of memory.
         --no-range              Program iterates all 0..focus and 0..spell combinations. This turns that off.
+        --scenarios <n>         Perform calculations for the first n scenarios.
         --help                  This print out.
 ```
 
@@ -43,6 +44,10 @@ A few examples for running one-off tasks
 `./eldersign --focus 1 --spell 1 --task PERIL,PERIL\>SCROLL,SCROLL --num-threads 4 --disable-saved`
 
 `./eldersign --clue 1 --task TERROR\|PERIL,SCROLL,SCROLL --num-threads 4 --disable-saved --large-mem`
+
+Note: Running with `clue > 0` will take a **very long time** the more dice used, so it's best not to run the last two scenarios.  Use the following command to impose a limit.
+
+`./eldersign --clue 1 --task TERROR\|PERIL,SCROLL,SCROLL --num-threads 4 --disable-saved --large-mem --scenarios 4`
 
 Output will look like
 
