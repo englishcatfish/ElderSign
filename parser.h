@@ -54,7 +54,7 @@ string serializeTasks(vector<vector<int>> tasks, bool inOrder) {
 	return str;
 }
 
-string serialize(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice) {
+string serialize(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect) {
 	sort(heldDice.begin(), heldDice.end());
 	string heldStr = to_string(numFocus) + ":" + to_string(numSpell) + ":" + to_string(numClue) + ":";
 	for (int i = 0; i < heldDice.size(); i++) {
@@ -64,7 +64,7 @@ string serialize(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yel
 		heldStr += to_string(heldDice[i]);
 	}
 	string tasksStr = serializeTasks(tasks, inOrder);
-	string s = tasksStr + ":" + to_string(numGreen) + ":" + to_string(yellowDie) + ":" + to_string(redDie) + ":" + heldStr;
+	string s = tasksStr + ":" + to_string(numGreen) + ":" + to_string(yellowDie) + ":" + to_string(redDie) + ":" + heldStr + ":" + to_string(terrorEffect);
 	return s;
 }
 
