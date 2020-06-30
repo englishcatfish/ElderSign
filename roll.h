@@ -121,7 +121,10 @@ void resetRoll(vector<int> roll) {
 	return;
 }
 
-string rollToString(vector<int> roll) {
+string rollToString(vector<int> roll, bool sortRoll) {
+	if (sortRoll) {
+		sort(roll.begin(), roll.end());
+	}
 	string s = "";
 	for (int die : roll) {
 		s += to_string(die);

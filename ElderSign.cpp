@@ -65,6 +65,9 @@ int globalTotalRolls;
 vector<int> globalRoll;
 vector<pair<double, int>> globalProbs;
 
+uint64_t totalRollsToIterate;
+uint64_t totalRollsIterated;
+
 string currentLineText;
 
 double calc(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect);
@@ -150,7 +153,7 @@ bool subsetRollMatchesTask(vector<int> roll, int mask, vector<int> task, vector<
 double bestMatchProb(vector<int> roll, vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect) {
 	string key = "";
 	if (largeMemEnabled) {
-		key = rollToString(roll) + serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
+		key = rollToString(roll, true) + serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
 		bestMatchMutex.lock();
 		if (bestMatchProbHistory.find(key) != bestMatchProbHistory.end()) {
 			double val = bestMatchProbHistory[key];
@@ -430,7 +433,7 @@ vector<vector<int>> getHoldable(vector<vector<int>> tasks, vector<int> roll, int
 double bestStrategyForRoll(vector<int> roll, vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect) {
 	string key2 = "";
 	if (largeMemEnabled) {
-		key2 = rollToString(roll) + serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
+		key2 = rollToString(roll, true) + serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
 		bestSuccessMutex.lock();
 		if (bestSuccessForRollHistory.find(key2) != bestSuccessForRollHistory.end()) {
 			double val = bestSuccessForRollHistory[key2];
@@ -452,12 +455,12 @@ double bestStrategyForRoll(vector<int> roll, vector<vector<int>> tasks, bool inO
 				if (numBits(mask) != m) {
 					continue;
 				}
-				
+
 				double success = 0.0;
 				vector<int> rollKeep = maskRoll(roll, ~mask);
 
 				if (largeMemEnabled) {
-					string key3 = rollToString(rollKeep) + key2;
+					string key3 = rollToString(rollKeep, true) + key2;
 					bestSuccessMutex.lock();
 					if (bestSuccessForRollHistory.find(key3) != bestSuccessForRollHistory.end()) {
 						success = bestSuccessForRollHistory[key3];
@@ -605,7 +608,7 @@ double calc(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDi
 	savedMutex.lock();
 	saved[key] = success;
 	if (savedEnabled) {
-		savedFile << key << "#" << success << endl;
+		savedFile << key << "#" << to_string(success) << endl;
 	}
 	savedMutex.unlock();
 	return success;
@@ -616,7 +619,7 @@ void launchThread(vector<vector<int>> tasks, bool inOrder, int numGreen, bool ye
 	int totalRolls = intPow(6, globalRoll.size());
 	while (true) {
 		rootMutex.lock();
-		cout << currentLineText << "..." << (100 * globalTotalRolls / totalRolls) << "%\r" << flush;
+		cout << currentLineText << "..." << (100 * totalRollsIterated / totalRollsToIterate) << "%\r" << flush;
 		// check if done
 		if (globalTotalRolls >= totalRolls) {
 			rootMutex.unlock();
@@ -625,6 +628,7 @@ void launchThread(vector<vector<int>> tasks, bool inOrder, int numGreen, bool ye
 		vector<int> roll = globalRoll;
 		int n = rollCombinations(globalRoll);;
 		globalTotalRolls += n;
+		totalRollsIterated += n;
 		incrRoll(globalRoll);
 		rootMutex.unlock();
 
@@ -635,6 +639,56 @@ void launchThread(vector<vector<int>> tasks, bool inOrder, int numGreen, bool ye
 		rootMutex.unlock();
 	}
 	return;
+}
+
+struct input {
+	int numGreen;
+	bool yellowDie;
+	bool redDie;
+	int numFocus;
+	int numSpell;
+	int numClue;
+	input() {
+		numGreen = 4;
+		yellowDie = false;
+		redDie = false;
+		numFocus = 0;
+		numSpell = 0;
+		numClue = 0;
+	}
+};
+
+bool incrInput(input& i, int maxGreen, bool hasYellow, bool hasRed, int maxFocus, int maxSpell, int maxClue) {
+	if (i.numClue < maxClue) {
+		i.numClue++;
+		return true;
+	}
+	i.numClue = 0;
+	if (i.numSpell < maxSpell) {
+		i.numSpell++;
+		return true;
+	}
+	i.numSpell = 0;
+	if (i.numFocus < maxFocus) {
+		i.numFocus++;
+		return true;
+	}
+	i.numFocus = 0;
+	if (!i.redDie && hasRed) {
+		i.redDie = true;
+		return true;
+	}
+	i.redDie = false;
+	if (!i.yellowDie && hasYellow) {
+		i.yellowDie = true;
+		return true;
+	}
+	i.yellowDie = false;
+	if (i.numGreen < maxGreen) {
+		i.numGreen++;
+		return true;
+	}
+	return false;
 }
 
 double calcInit(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, int terrorEffect) {
@@ -657,32 +711,52 @@ double calcInit(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yell
 		}
 		return 0.0;
 	}
-
-	globalTotalRolls = 0;
-	globalRoll = initRoll(numGreen, yellowDie, redDie);
-	globalProbs = vector<pair<double, int>>();
-
-	vector<thread> threads = vector<thread>();
-	for (int i = 0; i < numThreads; i++) {
-		threads.push_back(thread(launchThread, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect));
+	double success = 0.0;
+	input in = input();
+	totalRollsToIterate = 0;
+	totalRollsIterated = 0;
+	while (incrInput(in, numGreen, yellowDie, redDie, numFocus, numSpell, numClue)) {
+		totalRollsToIterate += intPow(6, in.numGreen + (in.yellowDie ? 1 : 0) + (in.redDie ? 1 : 0));
 	}
+	in = input();
+	while (incrInput(in, numGreen, yellowDie, redDie, numFocus, numSpell, numClue)) {
+		if (in.numGreen + (in.yellowDie ? 1 : 0) + (in.redDie ? 1 : 0) == 0) {
+			continue;
+		}
+		
+		string key2 = serialize(tasks, inOrder, in.numGreen, in.yellowDie, in.redDie, in.numFocus, in.numSpell, in.numClue, heldDice, terrorEffect);
+		if (saved.find(key2) != saved.end()) {
+			totalRollsIterated += intPow(6, in.numGreen + (in.yellowDie ? 1 : 0) + (in.redDie ? 1 : 0));
+			cout << currentLineText << "..." << (100 * totalRollsIterated / totalRollsToIterate) << "%\r" << flush;
+			continue;
+		}
+		globalTotalRolls = 0;
+		globalRoll = initRoll(in.numGreen, in.yellowDie, in.redDie);
+		globalProbs = vector<pair<double, int>>();
 
-	threads.push_back(thread(launchThread, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect));
-	for (thread & t : threads) {
-		if (t.joinable()) {
-			t.join();
+		vector<thread> threads = vector<thread>();
+		threads.push_back(thread(launchThread, tasks, inOrder, in.numGreen, in.yellowDie, in.redDie, in.numFocus, in.numSpell, in.numClue, heldDice, terrorEffect));
+		for (int i = 1; globalRoll.size() > 4 && i < numThreads; i++) {
+			threads.push_back(thread(launchThread, tasks, inOrder, in.numGreen, in.yellowDie, in.redDie, in.numFocus, in.numSpell, in.numClue, heldDice, terrorEffect));
+		}
+		
+		for (thread& t : threads) {
+			if (t.joinable()) {
+				t.join();
+			}
+		}
+
+		success = 0.0;
+		for (pair<double, int> g : globalProbs) {
+			success += (g.first * g.second);
+		}
+		success /= intPow(6, globalRoll.size());
+		saved[key2] = success;
+		if (savedEnabled) {
+			savedFile << key2 << "#" << to_string(success) << endl;
 		}
 	}
-
-	double success = 0.0;
-	for (pair<double, int> g : globalProbs) {
-		success += (g.first * g.second);
-	}
-	success /= intPow(6, globalRoll.size());
-	saved[key] = success;
-	if (savedEnabled) {
-		savedFile << key << "#" << success << endl;
-	}
+	
 	return success;
 }
 
