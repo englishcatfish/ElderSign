@@ -89,6 +89,26 @@ int rollCombinations(vector<int> roll) {
 	return total;
 }
 
+int rollCombinations(vector<int> roll, int mask) {
+	int numGreen = 0;
+	int counts[6] = { 0,0,0,0,0,0 };
+	for (int i = 0; i < roll.size(); i++) {
+		int p = 1 << i;
+		if ((mask & p) != p) {
+			continue;
+		}
+		if (roll[i] <= 6) {
+			numGreen++;
+			counts[roll[i] - 1]++;
+		}
+	}
+	int total = fac(numGreen);
+	for (int i = 0; i < 6; i++) {
+		total /= fac(counts[i]);
+	}
+	return total;
+}
+
 vector<int> maskRoll(vector<int> roll, int mask) {
 	vector<int> maskedRoll = vector<int>();
 	for (int i = 0; i < roll.size(); i++) {
@@ -112,7 +132,7 @@ void removeFromRoll(vector<int>& roll, vector<int>& dice) {
 	return;
 }
 
-void resetRoll(vector<int> roll) {
+void resetRoll(vector<int>& roll) {
 	for (int i = 0; i < roll.size(); i++) {
 		int dieColor = roll[i] / 100;
 		roll[i] = dieColor * 100 + 1;
@@ -130,4 +150,92 @@ string rollToString(vector<int> roll, bool sortRoll) {
 		s += to_string(die);
 	}
 	return s;
+}
+
+int distanceDiff(vector<int> r1, vector<int> r2) {
+	int diff = 0;
+	for (int i = 0; i < r1.size(); i++) {
+		bool found = false;
+		for (int j = 0; !found && j < r2.size(); j++) {
+			if (r1[i] == r2[j]) {
+				r2[j] = -1;
+				found = true;
+			}
+		}
+		if (!found) {
+			diff++;
+		}
+	}
+	return diff;
+}
+
+int maskDiff(vector<int> r1, vector<int> r2) {
+	int mask = 0;
+	for (int i = 0; i < r1.size(); i++) {
+		mask <<= 1;
+		bool found = false;
+		for (int j = 0; !found && j < r2.size(); j++) {
+			if (r1[i] == r2[j]) {
+				r2[j] = -1;
+				found = true;
+			}
+		}
+		if (!found) {
+			mask++;
+		}
+	}
+	return mask;
+}
+
+int rerollCombinations(vector<int> roll, vector<int> reroll, int mask) {	
+	int numGreen = 0;
+	int counts[6] = { 0,0,0,0,0,0 };
+	for (int i = 0; i < roll.size(); i++) {
+		int p = 1 << i;
+		if ((mask & p) == p) {
+			continue;
+		}
+		bool found = false;
+		for (int j = 0; !found && j < reroll.size(); j++) {
+			if (roll[i] == reroll[j]) {
+				reroll[j] = -1;
+				found = true;
+			}
+		}
+	}
+	for (int i = 0; i < reroll.size(); i++) {
+		if (reroll[i] == -1) {
+			continue;
+		}
+		if (reroll[i] <= 6) {
+			numGreen++;
+			counts[reroll[i] - 1]++;
+		}
+	}
+	
+	int total = fac(numGreen);
+	for (int i = 0; i < 6; i++) {
+		total /= fac(counts[i]);
+	}
+	return total;
+}
+
+bool maskedReroll(vector<int> roll, vector<int> reroll, int mask) {
+	for (int i = 0; i < roll.size(); i++) {
+		int p = 1 << i;
+		if ((p & mask) == p) {
+			continue;
+		}
+		bool found = false;
+		for (int j = 0; !found && j < reroll.size(); j++) {
+			if (roll[i] == reroll[j]) {
+				reroll[j] = -1;
+				found = true;
+			}
+		}
+		if (!found) {
+			return false;
+		}
+	}
+	return true;
 }

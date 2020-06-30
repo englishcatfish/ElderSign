@@ -449,62 +449,31 @@ double bestStrategyForRoll(vector<int> roll, vector<vector<int>> tasks, bool inO
 	// use a clue
 	// this will recursively call current method in case there are multiple clues
 	if (numClue > 0) {
-		for (int m = 1; m <= roll.size(); m++) {
-			// re-roll n-dice
-			for (int mask = 1; mask < intPow(2, roll.size()); mask++) {
-				if (numBits(mask) != m) {
+		vector<int> reroll = roll;
+		resetRoll(reroll);
+		int totalNewRolls = intPow(6, reroll.size());
+		int n = 0;
+		vector<double> successes = vector<double>();
+		for (int i = 0; i < intPow(2, reroll.size()); i++) {
+			successes.push_back(0.0);
+		}
+
+		for (int j = 0; j < totalNewRolls; j += n) {
+			n = rollCombinations(reroll);
+			double p = bestStrategyForRoll(reroll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue - 1, heldDice, terrorEffect);
+			int diff = distanceDiff(roll, reroll);
+			//int mask = maskDiff(roll, reroll);
+			for (int i = 1; i < successes.size(); i++) {
+				if (diff > numBits(i) || !maskedReroll(roll, reroll, i)) {
 					continue;
 				}
-
-				double success = 0.0;
-				vector<int> rollKeep = maskRoll(roll, ~mask);
-
-				if (largeMemEnabled) {
-					string key3 = rollToString(rollKeep, true) + key2;
-					bestSuccessMutex.lock();
-					if (bestSuccessForRollHistory.find(key3) != bestSuccessForRollHistory.end()) {
-						success = bestSuccessForRollHistory[key3];
-						bestSuccessMutex.unlock();
-					}
-					else {
-						bestSuccessMutex.unlock();
-						vector<int> rollNew = maskRoll(roll, mask);
-						resetRoll(rollNew);
-						int n = 0;
-						int totalNewRolls = intPow(6, rollNew.size());
-						for (int j = 0; j < totalNewRolls; j += n) {
-							n = rollCombinations(rollNew);
-							vector<int> _roll = rollKeep;
-							_roll.insert(_roll.end(), rollNew.begin(), rollNew.end());
-							sort(_roll.begin(), _roll.end());
-
-							double p = bestStrategyForRoll(_roll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue - 1, heldDice, terrorEffect);
-							success += n * p / totalNewRolls;
-							incrRoll(rollNew);
-						}
-						bestSuccessMutex.lock();
-						bestSuccessForRollHistory[key3] = success;
-						bestSuccessMutex.unlock();
-					}
-				}
-				else {
-					vector<int> rollNew = maskRoll(roll, mask);
-					resetRoll(rollNew);
-					int n = 0;
-					int totalNewRolls = intPow(6, rollNew.size());
-					for (int j = 0; j < totalNewRolls; j += n) {
-						n = rollCombinations(rollNew);
-						vector<int> _roll = rollKeep;
-						_roll.insert(_roll.end(), rollNew.begin(), rollNew.end());
-						sort(_roll.begin(), _roll.end());
-
-						double p = bestStrategyForRoll(_roll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue - 1, heldDice, terrorEffect);
-						success += n * p / totalNewRolls;
-						incrRoll(rollNew);
-					}
-				}
-				bestProb = max(success, bestProb);
+				successes[i] += rerollCombinations(roll, reroll, i) * p;
 			}
+			incrRoll(reroll);
+		}
+
+		for (int i = 1; i < successes.size(); i++) {
+			bestProb = max(bestProb, successes[i] / intPow(6, numBits(i)));
 		}
 	}
 
@@ -649,7 +618,7 @@ struct input {
 	int numSpell;
 	int numClue;
 	input() {
-		numGreen = 4;
+		numGreen = 3;
 		yellowDie = false;
 		redDie = false;
 		numFocus = 0;
