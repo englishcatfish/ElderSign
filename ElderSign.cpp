@@ -547,30 +547,11 @@ double bestStrategyForRoll(vector<int> roll, vector<vector<int>> tasks, bool inO
 
 	if (!(terrorTriggered && terrorEffect == IMMEDIATE_FAIL)) {
 		if (terrorEffect == DISCARD_ALL_TERROR) {
-			/*for (int i = roll.size() - 1; i >= 0; i--) {
+			for (int i = roll.size() - 1; i >= 0; i--) {
 				if (roll[i] == TERROR) {
 					numGreen--;
 					roll.erase(roll.begin() + i, roll.begin() + i + 1);
 				}
-			}*/
-			bool hasTerror = false;
-			for (int die : roll) {
-				if (die == TERROR) {
-					hasTerror = true;
-					break;
-				}
-			}
-			if (hasTerror) {
-				vector<int> _roll = vector<int>();
-				for (int die : roll) {
-					if (die == TERROR) {
-						numGreen--;
-					}
-					else {
-						_roll.push_back(die);
-					}
-				}
-				roll = _roll;
 			}
 		}
 
