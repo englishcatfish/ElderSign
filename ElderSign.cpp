@@ -37,7 +37,6 @@
 #include <set>
 #include <mutex>
 #include <thread>
-#include <future>
 
 #include "csv.h"
 #include "math.h"
@@ -63,7 +62,7 @@ bool largeMemEnabled = false;
 mutex rootMutex;
 int globalTotalRolls;
 vector<int> globalRoll;
-vector<pair<double, int>> globalProbs;
+double globalSuccess;
 
 uint64_t totalRollsToIterate;
 uint64_t totalRollsIterated;
@@ -71,17 +70,16 @@ uint64_t totalRollsIterated;
 string currentLineText;
 
 double calc(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect);
-vector<vector<int>> getHoldable(vector<vector<int>> tasks, vector<int> roll, int numHold, vector<int> heldDice, bool discardOne);
+vector<vector<int>> getHoldable(vector<vector<int>> tasks, vector<int>& roll, int numHold, vector<int> heldDice, bool discardOne);
 
 // returns TRUE when all available dice selected by the mask can be applied to the task
-bool subsetRollMatchesTask(vector<int> roll, int mask, vector<int> task, vector<int> focused) {
-	roll.insert(roll.end(), focused.begin(), focused.end());
+bool subsetRollMatchesTask(vector<int>& roll, int mask, vector<int>& task, vector<int>& focused) {
 	for (int i = 0; i < task.size(); i++) {
 		int goal = task[i];
 		bool metGoal = false;
 		if (goal == TERROR || goal == TERROR_PERIL || goal == TERROR_SCROLL) {
 			for (int j = 0; !metGoal && j < roll.size(); j++) {
-				int n = intPow(2, j);
+				int n = 1 << j;
 				if ((mask & n) != n) {
 					continue;
 				}
@@ -91,10 +89,21 @@ bool subsetRollMatchesTask(vector<int> roll, int mask, vector<int> task, vector<
 					metGoal = true;
 				}
 			}
+			for (int j = 0; !metGoal && j < focused.size(); j++) {
+				int n = 1 << (j + roll.size());
+				if ((mask & n) != n) {
+					continue;
+				}
+				int die = focused[j];
+				if (die == TERROR || die == R_WILD) {
+					mask -= n;
+					metGoal = true;
+				}
+			}
 		}
 		if (goal == PERIL || goal == TERROR_PERIL || goal == PERIL_SCROLL) {
 			for (int j = 0; !metGoal && j < roll.size(); j++) {
-				int n = intPow(2, j);
+				int n = 1 << j;
 				if ((mask & n) != n) {
 					continue;
 				}
@@ -104,16 +113,38 @@ bool subsetRollMatchesTask(vector<int> roll, int mask, vector<int> task, vector<
 					metGoal = true;
 				}
 			}
+			for (int j = 0; !metGoal && j < focused.size(); j++) {
+				int n = 1 << (j + roll.size());
+				if ((mask & n) != n) {
+					continue;
+				}
+				int die = focused[j];
+				if (die == PERIL || die == Y_PERIL || die == R_PERIL || die == R_WILD) {
+					mask -= n;
+					metGoal = true;
+				}
+			}
 		}
 		if (goal == SCROLL || goal == TERROR_SCROLL || goal == PERIL_SCROLL) {
 			for (int j = 0; !metGoal && j < roll.size(); j++) {
-				int p = intPow(2, j);
-				if ((mask & p) != p) {
+				int n = 1 << j;
+				if ((mask & n) != n) {
 					continue;
 				}
 				int die = roll[j];
 				if (die == SCROLL || die == Y_SCROLL || die == R_SCROLL || die == R_WILD) {
-					mask -= p;
+					mask -= n;
+					metGoal = true;
+				}
+			}
+			for (int j = 0; !metGoal && j < focused.size(); j++) {
+				int n = 1 << (j + roll.size());
+				if ((mask & n) != n) {
+					continue;
+				}
+				int die = focused[j];
+				if (die == SCROLL || die == Y_SCROLL || die == R_SCROLL || die == R_WILD) {
+					mask -= n;
 					metGoal = true;
 				}
 			}
@@ -121,7 +152,7 @@ bool subsetRollMatchesTask(vector<int> roll, int mask, vector<int> task, vector<
 		int numInvs = getInvValue(goal);
 		if (numInvs > 0) {
 			for (int j = 0; !metGoal && j < roll.size(); j++) {
-				int n = intPow(2, j);
+				int n = 1 << j;
 				if ((mask & n) != n) {
 					continue;
 				}
@@ -129,10 +160,36 @@ bool subsetRollMatchesTask(vector<int> roll, int mask, vector<int> task, vector<
 				if (die == INV_1 || die == Y_INV_1) {
 					numInvs -= 1;
 					mask -= n;
-				} else if (die == INV_2 || die == Y_INV_2 || die == R_INV_2) {
+				}
+				else if (die == INV_2 || die == Y_INV_2 || die == R_INV_2) {
 					numInvs -= 2;
 					mask -= n;
-				} else if (die == INV_3 || die == Y_INV_3 || die == R_INV_3) {
+				}
+				else if (die == INV_3 || die == Y_INV_3 || die == R_INV_3) {
+					numInvs -= 3;
+					mask -= n;
+				}
+				else if (die == Y_INV_4 || die == R_INV_4 || die == R_WILD) {
+					numInvs -= 4;
+					mask -= n;
+				}
+				metGoal = numInvs <= 0;
+			}
+			for (int j = 0; !metGoal && j < focused.size(); j++) {
+				int n = 1 << (j + roll.size());
+				if ((mask & n) != n) {
+					continue;
+				}
+				int die = focused[j];
+				if (die == INV_1 || die == Y_INV_1) {
+					numInvs -= 1;
+					mask -= n;
+				}
+				else if (die == INV_2 || die == Y_INV_2 || die == R_INV_2) {
+					numInvs -= 2;
+					mask -= n;
+				}
+				else if (die == INV_3 || die == Y_INV_3 || die == R_INV_3) {
 					numInvs -= 3;
 					mask -= n;
 				}
@@ -153,7 +210,7 @@ bool subsetRollMatchesTask(vector<int> roll, int mask, vector<int> task, vector<
 double bestMatchProb(vector<int> roll, vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect) {
 	string key = "";
 	if (largeMemEnabled) {
-		key = rollToString(roll, true) + serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
+		key = rollToString(roll) + serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
 		bestMatchMutex.lock();
 		if (bestMatchProbHistory.find(key) != bestMatchProbHistory.end()) {
 			double val = bestMatchProbHistory[key];
@@ -170,7 +227,7 @@ double bestMatchProb(vector<int> roll, vector<vector<int>> tasks, bool inOrder, 
 	vector<int> _heldDice;
 	
 	double bestProb = 0.0;
-	for (int mask = 0; mask < intPow(2, roll.size() + heldDice.size()); mask++) {
+	for (int mask = 0; mask < (1 << (roll.size() + heldDice.size())); mask++) {
 		for (int j = 0; j < tasks.size(); j++) {
 			if (subsetRollMatchesTask(roll, mask, tasks[j], heldDice)) {
 				_tasks = tasks;
@@ -178,10 +235,10 @@ double bestMatchProb(vector<int> roll, vector<vector<int>> tasks, bool inOrder, 
 				_numGreen = numGreen;
 				_yellowDie = yellowDie;
 				_redDie = redDie;
-				_heldDice = maskRoll(heldDice, ~(mask / intPow(2, roll.size())));
+				_heldDice = maskRoll(heldDice, ~(mask >> roll.size()));
 
 				for (int i = 0; i < roll.size(); i++) {
-					int n = intPow(2, i);
+					int n = 1 << i;
 					if ((mask & n) != n) {
 						continue;
 					}
@@ -239,11 +296,12 @@ double bestMatchProb(vector<int> roll, vector<vector<int>> tasks, bool inOrder, 
 	return bestProb;
 }
 
-bool hasMinDice(vector<vector<int>> tasks, int numGreen, bool yellowDie, bool redDie, vector<int> heldDice) {
-	int totalDiceHave = numGreen + (yellowDie ? 1 : 0) + (redDie ? 1 : 0) + heldDice.size();
-	if (totalDiceHave == heldDice.size()) {
+bool hasMinDice(vector<vector<int>>& tasks, int numGreen, bool yellowDie, bool redDie, vector<int>& heldDice) {
+	int totalDiceHave = numGreen + (yellowDie ? 1 : 0) + (redDie ? 1 : 0);
+	if (totalDiceHave <= 0) {
 		return false;
 	}
+	totalDiceHave += heldDice.size();
 	int totalDiceNeeded = 0;
 	for (int i = 0; i < tasks.size(); i++) {
 		for (int j = 0; j < tasks[i].size(); j++) {
@@ -335,9 +393,9 @@ bool dieMatchesGoal(int die, int goal) {
 	return false;
 }
 
-bool isPartialMatch(vector<vector<int>> tasks, vector<int> roll, int mask) {
+bool isPartialMatch(vector<vector<int>> tasks, vector<int>& roll, int mask) {
 	for (int j = 0; j < roll.size(); j++) {
-		int p = intPow(2, j);
+		int p = 1 << j;
 		if ((mask & p) != p) {
 			continue;
 		}
@@ -406,7 +464,7 @@ void filterHeldDice(vector<vector<int>>& tasks, vector<int>& heldDice) {
 	}
 }
 
-vector<vector<int>> getHoldable(vector<vector<int>> tasks, vector<int> roll, int numHold, vector<int> heldDice, bool discardOne) {
+vector<vector<int>> getHoldable(vector<vector<int>> tasks, vector<int>& roll, int numHold, vector<int> heldDice, bool discardOne) {
 	vector<vector<int>> holdable = vector<vector<int>>();
 	int maxFocus = roll.size() - (1 + discardOne);
 	numHold = min(numHold, maxFocus);
@@ -417,7 +475,7 @@ vector<vector<int>> getHoldable(vector<vector<int>> tasks, vector<int> roll, int
 	filterHeldDice(tasks, heldDice);
 
 	for (int i = 1; i <= numHold; i++) {
-		for (int mask = 1; mask < intPow(2, roll.size()); mask++) {
+		for (int mask = 1; mask < (1 << roll.size()); mask++) {
 			if (numBits(mask) != i) {
 				continue;
 			}
@@ -433,7 +491,7 @@ vector<vector<int>> getHoldable(vector<vector<int>> tasks, vector<int> roll, int
 double bestStrategyForRoll(vector<int> roll, vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect) {
 	string key2 = "";
 	if (largeMemEnabled) {
-		key2 = rollToString(roll, true) + serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
+		key2 = rollToString(roll) + serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
 		bestSuccessMutex.lock();
 		if (bestSuccessForRollHistory.find(key2) != bestSuccessForRollHistory.end()) {
 			double val = bestSuccessForRollHistory[key2];
@@ -454,7 +512,7 @@ double bestStrategyForRoll(vector<int> roll, vector<vector<int>> tasks, bool inO
 		int totalNewRolls = intPow(6, reroll.size());
 		int n = 0;
 		vector<double> successes = vector<double>();
-		for (int i = 0; i < intPow(2, reroll.size()); i++) {
+		for (int i = 0; i < (1 << reroll.size()); i++) {
 			successes.push_back(0.0);
 		}
 
@@ -489,11 +547,30 @@ double bestStrategyForRoll(vector<int> roll, vector<vector<int>> tasks, bool inO
 
 	if (!(terrorTriggered && terrorEffect == IMMEDIATE_FAIL)) {
 		if (terrorEffect == DISCARD_ALL_TERROR) {
-			for (int i = roll.size() - 1; i >= 0; i--) {
+			/*for (int i = roll.size() - 1; i >= 0; i--) {
 				if (roll[i] == TERROR) {
 					numGreen--;
 					roll.erase(roll.begin() + i, roll.begin() + i + 1);
 				}
+			}*/
+			bool hasTerror = false;
+			for (int die : roll) {
+				if (die == TERROR) {
+					hasTerror = true;
+					break;
+				}
+			}
+			if (hasTerror) {
+				vector<int> _roll = vector<int>();
+				for (int die : roll) {
+					if (die == TERROR) {
+						numGreen--;
+					}
+					else {
+						_roll.push_back(die);
+					}
+				}
+				roll = _roll;
 			}
 		}
 
@@ -586,6 +663,10 @@ double calc(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDi
 // continue running bestStrategyForRoll until no jobs/rolls left
 void launchThread(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect) {
 	int totalRolls = intPow(6, globalRoll.size());
+	vector<int> roll = vector<int>();
+	for (int i : globalRoll) {
+		roll.push_back(0);
+	}
 	while (true) {
 		rootMutex.lock();
 		cout << currentLineText << "..." << (100 * totalRollsIterated / totalRollsToIterate) << "%\r" << flush;
@@ -594,8 +675,10 @@ void launchThread(vector<vector<int>> tasks, bool inOrder, int numGreen, bool ye
 			rootMutex.unlock();
 			break;
 		}
-		vector<int> roll = globalRoll;
-		int n = rollCombinations(globalRoll);;
+		for (int i = 0; i < globalRoll.size(); i++) {
+			roll[i] = globalRoll[i];
+		}
+		int n = rollCombinations(globalRoll);
 		globalTotalRolls += n;
 		totalRollsIterated += n;
 		incrRoll(globalRoll);
@@ -604,60 +687,10 @@ void launchThread(vector<vector<int>> tasks, bool inOrder, int numGreen, bool ye
 		double p = bestStrategyForRoll(roll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
 
 		rootMutex.lock();
-		globalProbs.push_back(pair<double, int>(p, n));
+		globalSuccess += n * p;
 		rootMutex.unlock();
 	}
 	return;
-}
-
-struct input {
-	int numGreen;
-	bool yellowDie;
-	bool redDie;
-	int numFocus;
-	int numSpell;
-	int numClue;
-	input() {
-		numGreen = 3;
-		yellowDie = false;
-		redDie = false;
-		numFocus = 0;
-		numSpell = 0;
-		numClue = 0;
-	}
-};
-
-bool incrInput(input& i, int maxGreen, bool hasYellow, bool hasRed, int maxFocus, int maxSpell, int maxClue) {
-	if (i.numClue < maxClue) {
-		i.numClue++;
-		return true;
-	}
-	i.numClue = 0;
-	if (i.numSpell < maxSpell) {
-		i.numSpell++;
-		return true;
-	}
-	i.numSpell = 0;
-	if (i.numFocus < maxFocus) {
-		i.numFocus++;
-		return true;
-	}
-	i.numFocus = 0;
-	if (!i.redDie && hasRed) {
-		i.redDie = true;
-		return true;
-	}
-	i.redDie = false;
-	if (!i.yellowDie && hasYellow) {
-		i.yellowDie = true;
-		return true;
-	}
-	i.yellowDie = false;
-	if (i.numGreen < maxGreen) {
-		i.numGreen++;
-		return true;
-	}
-	return false;
 }
 
 double calcInit(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, int terrorEffect) {
@@ -680,7 +713,7 @@ double calcInit(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yell
 		}
 		return 0.0;
 	}
-	double success = 0.0;
+
 	input in = input();
 	totalRollsToIterate = 0;
 	totalRollsIterated = 0;
@@ -701,7 +734,7 @@ double calcInit(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yell
 		}
 		globalTotalRolls = 0;
 		globalRoll = initRoll(in.numGreen, in.yellowDie, in.redDie);
-		globalProbs = vector<pair<double, int>>();
+		globalSuccess = 0.0;
 
 		vector<thread> threads = vector<thread>();
 		threads.push_back(thread(launchThread, tasks, inOrder, in.numGreen, in.yellowDie, in.redDie, in.numFocus, in.numSpell, in.numClue, heldDice, terrorEffect));
@@ -715,18 +748,14 @@ double calcInit(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yell
 			}
 		}
 
-		success = 0.0;
-		for (pair<double, int> g : globalProbs) {
-			success += (g.first * g.second);
-		}
-		success /= intPow(6, globalRoll.size());
-		saved[key2] = success;
+		globalSuccess /= intPow(6, globalRoll.size());
+		saved[key2] = globalSuccess;
 		if (savedEnabled) {
-			savedFile << key2 << "#" << to_string(success) << endl;
+			savedFile << key2 << "#" << to_string(globalSuccess) << endl;
 		}
 	}
 	
-	return success;
+	return globalSuccess;
 }
 
 void readInSaved(bool clearSaved) {

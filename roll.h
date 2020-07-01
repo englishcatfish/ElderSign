@@ -112,7 +112,7 @@ int rollCombinations(vector<int>& roll, int mask) {
 vector<int> maskRoll(vector<int> roll, int mask) {
 	vector<int> maskedRoll = vector<int>();
 	for (int i = 0; i < roll.size(); i++) {
-		int n = intPow(2, i);
+		int n = 1 << i;
 		if ((mask & n) != n) {
 			continue;
 		}
@@ -141,10 +141,7 @@ void resetRoll(vector<int>& roll) {
 	return;
 }
 
-string rollToString(vector<int> roll, bool sortRoll) {
-	if (sortRoll) {
-		sort(roll.begin(), roll.end());
-	}
+string rollToString(vector<int> roll) {
 	string s = "";
 	for (int die : roll) {
 		s += to_string(die);
@@ -233,4 +230,54 @@ bool maskedReroll(vector<int>& roll, vector<int>& reroll, int mask) {
 		}
 	}
 	return true;
+}
+
+struct input {
+	int numGreen;
+	bool yellowDie;
+	bool redDie;
+	int numFocus;
+	int numSpell;
+	int numClue;
+	input() {
+		numGreen = 3;
+		yellowDie = false;
+		redDie = false;
+		numFocus = 0;
+		numSpell = 0;
+		numClue = 0;
+	}
+};
+
+bool incrInput(input& i, int maxGreen, bool hasYellow, bool hasRed, int maxFocus, int maxSpell, int maxClue) {
+	if (i.numClue < maxClue) {
+		i.numClue++;
+		return true;
+	}
+	i.numClue = 0;
+	if (i.numSpell < maxSpell) {
+		i.numSpell++;
+		return true;
+	}
+	i.numSpell = 0;
+	if (i.numFocus < maxFocus) {
+		i.numFocus++;
+		return true;
+	}
+	i.numFocus = 0;
+	if (!i.redDie && hasRed) {
+		i.redDie = true;
+		return true;
+	}
+	i.redDie = false;
+	if (!i.yellowDie && hasYellow) {
+		i.yellowDie = true;
+		return true;
+	}
+	i.yellowDie = false;
+	if (i.numGreen < maxGreen) {
+		i.numGreen++;
+		return true;
+	}
+	return false;
 }
