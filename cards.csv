@@ -1,293 +1,293 @@
-﻿Expansion,Name,Tasks
-Core,The Curator,"SCROLL,SCROLL,SCROLL|SCROLL,INV_3"
-Core,Koi Pond,"TERROR|TERROR,PERIL,PERIL"
-Core,Hallway on Fire,PERIL>PERIL
-Core,Late Night Break-In,INV_3|INV_6
-Core,Lights Out,"INV_3>PERIL,PERIL>SCROLL,SCROLL"
-Core,Horrible Visions,"PERIL,TERROR|SCROLL,PERIL"
-Core,Did You Hear That?,"PERIL|PERIL,PERIL"
-Core,Gate to Elsewhere,"SCROLL|SCROLL,SCROLL"
-Core,When Night Falls,"TERROR|PERIL,SCROLL,SCROLL"
-Core,You Become that Which You Fear Most,"TERROR,TERROR,TERROR"
-Core,Don't Fall Asleep,"TERROR|TERROR,TERROR"
-Core,Unnatural Habitat,"PERIL,PERIL,INV_3"
-Core,Ancient Relics,"SCROLL,INV_3|SCROLL,INV_3"
-Core,Transported By Magic,"INV_6|SCROLL,SCROLL"
-Core,The Graveyard,PERIL|TERROR|INV_7
-Core,There's Something in the Basement,INV_6|SCROLL|TERROR
-Core,Vermin in the Pipes,"INV_3|INV_3|INV_3,PERIL"
-Core,Gala in the Great Hall,"INV_2,SCROLL,PERIL|INV_3"
-Core,Forgotten Knowledge,"SCROLL|TERROR,INV_8"
-Core,The Missing Records,"INV_6|SCROLL,INV_3"
-Core,A Peculiar Specimen,INV_3>INV_6>PERIL
-Core,The Loading Dock,"PERIL|PERIL,INV_3"
-Core,Haunted by a Shadowy Figure,"PERIL,TERROR"
-Core,A Secret Gathering,"INV_6|SCROLL,SCROLL"
-Core,Stay Away From The Windows,"INV_8|PERIL,PERIL"
-Core,The Hedge Maze,"INV_2,PERIL|PERIL,PERIL"
-Core,The Hidden Passage,"INV_3>PERIL,INV_3>SCROLL"
-Core,Blood On The Floor,"INV_2>INV_3>TERROR,PERIL"
-Core,The Storage Closet,"INV_3>INV_3>SCROLL,SCROLL"
-Core,Something Has Broken Free,"PERIL|TERROR,TERROR"
-Core,Administration Office,SCROLL|INV_9
-Core,The Archives,"SCROLL|SCROLL,INV_3|SCROLL,PERIL"
-Core,Riot In The Streets,INV_3>INV_9
-Core,The Gift Shop,"INV_3>SCROLL,INV_3"
-Core,The Security Office,INV_2>INV_3>INV_6
-Core,Public Lavatory,"PERIL,SCROLL,SCROLL"
-Core,The Hall of the Dead,"SCROLL|PERIL,PERIL|INV_5"
-Core,The Guided Tour,INV_2>INV_4>SCROLL
-Core,A Terrible Discovery,"INV_3,TERROR|SCROLL,SCROLL"
-Core,We Need to Find Help,"PERIL,PERIL,SCROLL,INV_3"
-Core,Medusa Exhibit,TERROR>SCROLL>INV_7
-Core,Please Do Not Touch the Exhibits,"TERROR,TERROR|PERIL,PERIL"
-Core,Remians of the High Priest,"PERIL|SCROLL,INV_6"
-Core,Tempest in a Teapot,"INV_4>TERROR>PERIL,SCROLL"
-Core,Mysterious Tome,"INV_3,TERROR|SCROLL,SCROLL"
-Core,The Key to the Beyond,"INV_3>SCROLL,PERIL,INV_2"
-Core,The Writing on the Wall,"SCROLL,PERIL,INV_5"
-Unseen Forces,Strange Robberies,"INV_4|PERIL,SCROLL,PERIL"
-Unseen Forces,It's Got Me,"INV_3,PERIL,TERROR"
-Unseen Forces,Vision of Demise,"SCROLL,SCROLL|TERROR,TERROR"
-Unseen Forces,Balancing Mind and Body,"SCROLL,PERIL|PERIL,SCROLL"
-Unseen Forces,Slithering Shadows,"INV_5|PERIL,PERIL,PERIL"
-Unseen Forces,Rite of Passage,"PERIL>SCROLL>INV_3,TERROR"
-Unseen Forces,Sudden Attack,"PERIL|INV_3,PERIL"
-Unseen Forces,Mysterious Puzzle Box,SCROLL
-Unseen Forces,The Door is Ajar,PERIL|INV_2|INV_7
-Unseen Forces,Lingering Curse,"INV_3|SCROLL,SCROLL,PERIL"
-Unseen Forces,Just Sign Here,SCROLL|PERIL|INV_3
-Unseen Forces,In the Stacks,"PERIL,TERROR|TERROR"
-Unseen Forces,The Hidden Temple,"INV_5>INV_3,SCROLL,PERIL"
-Unseen Forces,The Director's Safe,"INV_2,PERIL|PERIL,PERIL"
-Unseen Forces,Test of Faith,"INV_6|INV_3,PERIL"
-Unseen Forces,Prized Display,TERROR|PERIL|SCROLL
-Unseen Forces,Seeking Leads,"INV_1>PERIL>PERIL,SCROLL"
-Unseen Forces,Break on Through,"SCROLL|INV_3,SCROLL"
-Unseen Forces,Midnight Visitor,"PERIL,PERIL|PERIL,TERROR"
-Unseen Forces,Visiting Antiquarian,"SCROLL,PERIL|SCROLL"
-Unseen Forces,…Too Quiet,"SCROLL,TERROR|TERROR,TERROR"
-Unseen Forces,Fragments of Knowledge,"INV_6|TERROR|SCROLL,SCROLL"
-Unseen Forces,Bloody Footprints,"PERIL,PERIL|SCROLL,SCROLL|TERROR"
-Unseen Forces,Up on the Roof,"TERROR,PERIL,SCROLL"
-Unseen Forces,Fickle Fates,"SCROLL,SCROLL|INV_2,SCROLL"
-Unseen Forces,The Boiler Room,"INV_4,TERROR|PERIL,TERROR"
-Unseen Forces,Heroic Rescue,"PERIL>TERROR,TERROR,TERROR"
-Unseen Forces,Crazed Writings,INV_4|TERROR|SCROLL
-Unseen Forces,Recruiting Aid,INV_3>INV_6>INV_9
-Unseen Forces,The True History,"INV_3,SCROLL|SCROLL,SCROLL"
-Unseen Forces,Walking the Ledge,"PERIL>PERIL>PERIL,PERIL"
-Unseen Forces,Wicked Old Man,"INV_1,SCROLL,TERROR|INV_3,TERROR"
-Unseen Forces,Ominous Portents,"SCROLL,SCROLL,SCROLL"
-Unseen Forces,Under Construction,"PERIL|SCROLL,SCROLL"
-Unseen Forces,The Night Watchman,"PERIL,PERIL|PERIL"
-Unseen Forces,The Elder Sign,"SCROLL>SCROLL>INV_2,SCROLL"
-Unseen Forces,Dreaming of a Stranger,"SCROLL,SCROLL,PERIL>TERROR"
-Unseen Forces,It's Quiet,INV_12
-Unseen Forces,Walled Up,"INV_2,TERROR|INV_6"
-Unseen Forces,Repugnant Tome,"SCROLL,SCROLL>SCROLL"
-Unseen Forces,Vital Information,TERROR>SCROLL>INV_3
-Other Worlds,City of the Great Race,"INV_3|TERROR,SCROLL,PERIL"
-Other Worlds,Lost Carcosa,"TERROR,TERROR,TERROR|INV_5"
-Other Worlds,Plateau of Leng,"SCROLL,TERROR|TERROR,PERIL,TERROR"
-Other Worlds,The Dreamlands,"PERIL,SCROLL,INV_3"
-Other Worlds,Yuggoth,"PERIL,TERROR|INV_8"
-Other Worlds,Another Time,"SCROLL,SCROLL|INV_3"
-Other Worlds,Another Dimension,"SCROLL,INV_1|TERROR,PERIL"
-Other Worlds,Great Hall of Celeano,TERROR|SCROLL|INV_6
-Other Worlds,R'lyeh,"INV_1,INV_1|SCROLL,SCROLL,PERIL,TERROR"
-Other Worlds,The Abyss,"PERIL,TERROR|SCROLL,SCROLL,PERIL"
-Other Worlds,City of Gugs,"INV_3,INV_3,PERIL|PERIL,PERIL,TERROR"
-Other Worlds,Ancient Sarnath,"INV_4,TERROR|INV_3,TERROR,SCROLL"
-Other Worlds,Lost in Time and Space,"INV_5|INV_3,TERROR"
-Other Worlds,The Vaults of Zin,"PERIL,TERROR,TERROR"
-Other Worlds,Far Side of the Moon,"INV_6|INV_6,SCROLL"
-Other Worlds,Ancient Egypt,"INV_3,SCROLL|INV_4,SCROLL"
-Other Worlds,Unknown Kadath,"TERROR,TERROR+PERIL>TERROR,TERROR>SCROLL,TERROR+SCROLL"
-Other Worlds,The Great Temple,"PERIL,PERIL|PERIL,PERIL,TERROR+PERIL"
-Omens of Ice,Impossible Cavern,"INV_1,SCROLL|INV_2|INV_3,SCROLL"
-Omens of Ice,At the Window,"INV_5>TERROR+PERIL,PERIL"
-Omens of Ice,The Midnight Sun,"SCROLL,SCROLL|INV_4,PERIL"
-Omens of Ice,Larder of Bones,"INV_2,PERIL,PERIL|INV_2,TERROR"
-Omens of Ice,Hunting Party,"INV_1,SCROLL|PERIL,PERIL"
-Omens of Ice,Arctic Fog,"INV_1>INV_2>INV_2,PERIL"
-Omens of Ice,Swallowed Below,"INV_3,TERROR|INV_4,PERIL"
-Omens of Ice,The Light Within,"TERROR+SCROLL,SCROLL,INV_1|TERROR+SCROLL,TERROR"
-Omens of Ice,Snow Graves,"INV_4,TERROR,SCROLL,SCROLL"
-Omens of Ice,Frigid Seas,"INV_2,TERROR>INV_2,PERIL"
-Omens of Ice,Avalanche,"PERIL,PERIL,PERIL,TERROR"
-Omens of Ice,Spawn of Ithaqua,"TERROR+SCROLL|INV_2,TERROR+PERIL,TERROR+PERIL|PERIL,TERROR"
-Omens of Ice,The Frozen Temple,"INV_2,TERROR+SCROLL,TERROR,TERROR|INV_2,TERROR+SCROLL"
-Omens of Ice,Dangerous Passage,"PERIL,PERIL|INV_2,TERROR"
-Omens of Ice,Call of the Northern Lights,"SCROLL,SCROLL>INV_9"
-Omens of Ice,The Storm,"INV_4,PERIL,PERIL|INV_4"
-Omens of Ice,Summon The Storm,"INV_2,TERROR+SCROLL,SCROLL,SCROLL"
-Omens of Ice,Ancient Obelisk,"INV_2,SCROLL|INV_5,SCROLL"
-Omens of Ice,Black Out,"INV_3,SCROLL|PERIL|PERIL,TERROR"
-Omens of Ice,Murder in the Night,"INV_4,SCROLL|TERROR,TERROR"
-Omens of Ice,Unnatural Habitat,"TERROR+PERIL,TERROR+PERIL,PERIL|INV_1"
-Omens of Ice,Ford's Terror,"INV_3,TERROR>PERIL,TERROR"
-Omens of Ice,Endless Night,"INV_7,TERROR|TERROR,TERROR"
-Omens of Ice,Cracks in the Ice,"INV_2|PERIL,SCROLL,TERROR"
-Omens of Ice,Poisoned Land,"INV_1,PERIL|INV_5,PERIL"
-Omens of Ice,Nowhere Left to Go,"PERIL,SCROLL|INV_2,TERROR"
-Omens of Ice,Force of Nature,"PERIL,PERIL,TERROR|TERROR"
-Omens of Ice,Cavern of the Bound,PERIL|TERROR|SCROLL
-Omens of Ice,Native Warning,"INV_3,TERROR>INV_3,SCROLL"
-Omens of Ice,Chest of Winter,"INV_2,TERROR+SCROLL|SCROLL,SCROLL,TERROR+SCROLL"
-Omens of Ice,The Forgotten Explorer,"INV_2,PERIL,PERIL,TERROR|TERROR+PERIL"
-Omens of Ice,The Pillar of Secrets,"INV_2,INV_1,INV_1|INV_3,INV_2,INV_1"
-Omens of Ice,Winter's Song,"INV_1,INV_2,TERROR"
-Omens of Ice,Sabotage,"INV_2,PERIL|PERIL"
-Omens of Ice,Barnette's Trading Post,INV_2|INV_4
-Omens of Ice,Corrupted Trapper,"INV_2,SCROLL|INV_3"
-Omens of Ice,Visiting Expert,"INV_2,SCROLL,SCROLL|INV_2"
-Omens of Ice,Bone Carver,"INV_2,SCROLL|INV_4,PERIL"
-Omens of Ice,Public Support,INV_1>INV_2>INV_3
-Omens of Ice,Frostbite,"INV_1,INV_1,INV_1"
-Omens of Ice,Last Breath,"INV_4,TERROR,TERROR"
-Omens of Ice,Cabin Fever,INV_2|SCROLL|TERROR
-Omens of Ice,Private Collection,"INV_3,TERROR+SCROLL|INV_2,SCROLL"
-Omens of Ice,Food Shortage,"INV_3,PERIL|INV_4"
-Omens of Ice,White Out,"INV_2|PERIL|TERROR,SCROLL"
-Omens of Ice,Northern Tales,"TERROR+SCROLL,TERROR+SCROLL|TERROR+PERIL,TERROR|PERIL"
-Omens of Ice,Frozen,"INV_2,PERIL,SCROLL"
-Omens of Ice,Obsessive Greed,"INV_3,TERROR|INV_3,PERIL"
-Omens of Ice,Through the Ice,"INV_4|PERIL,PERIL"
-Omens of Ice,Warning in Inuktitut,"TERROR+SCROLL,SCROLL|INV_2"
-Omens of Ice,Death Below,"PERIL,TERROR,INV_2"
-Omens of Ice,The Road to Elsewhere,"INV_1>INV_2>SCROLL,SCROLL"
-Omens of Ice,Frozen in Time,"INV_4,SCROLL|PERIL,TERROR"
-Omens of Ice,Eureka Cafe,INV_2|INV_4
-Omens of Ice,Hall of Totems,"INV_1,INV_1,TERROR,SCROLL"
-Omens of Ice,Finding the Way,"INV_1,SCROLL>INV_1,INV_2,INV_3"
-Omens of Ice,Unnatural Blizzard,"INV_1,PERIL|INV_4"
-Omens of Ice,Blood in the Snow,"INV_4,TERROR|PERIL+SCROLL"
-Omens of Ice,Refuge of Faith,"INV_2,TERROR|SCROLL"
-Omens of Ice,Hunter of Men,"PERIL,SCROLL>PERIL,TERROR"
-Omens of Ice,Heart of Darkness,"INV_1,TERROR+SCROLL,TERROR+SCROLL,TERROR+SCROLL|INV_1,TERROR+PERIL,TERROR+PERIL,TERROR+PERIL"
-Omens of Ice,Treacherous Ascent,"INV_1,INV_2,INV_3>TERROR+SCROLL,PERIL+SCROLL,TERROR+PERIL"
-Omens of Ice,Into the Wild,SCROLL>INV_3>PERIL
-Omens of Ice,Arrival,"INV_2,INV_2>INV_3"
-Omens of the Pharaoh,Uneasy Journey,SCROLL|PERIL|SCROLL+PERIL
-Omens of the Pharaoh,Exhibit Storage,"TERROR>PERIL,TERROR+PERIL"
-Omens of the Pharaoh,Chance Encounter,"SCROLL,SCROLL"
-Omens of the Pharaoh,Planning the Dig,"INV_3|SCROLL+PERIL,TERROR+PERIL"
-Omens of the Pharaoh,A Meeting of Minds,"INV_2,INV_1|INV_2,INV_1"
-Omens of the Pharaoh,Trouble in the Bazaar,"INV_2,INV_1,SCROLL+PERIL|TERROR"
-Omens of the Pharaoh,Brazen Stalker,INV_3|INV_3|INV_3
-Omens of the Pharaoh,Corner Gift Shop,"INV_3,SCROLL+PERIL,TERROR+PERIL,TERROR+SCROLL"
-Omens of the Pharaoh,The Golden Scarab,"INV_1,TERROR+PERIL|INV_2,TERROR+SCROLL"
-Omens of the Pharaoh,Seedy Wares,"INV_3,INV_2,INV_1"
-Omens of the Pharaoh,Lost in Thought,"INV_1>PERIL,SCROLL,TERROR"
-Omens of the Pharaoh,Book of the Dead,"INV_2,SCROLL|PERIL"
-Omens of the Pharaoh,Cursed Figurine,SCROLL|SCROLL
-Omens of the Pharaoh,Temple Courtyard,INV_6
-Omens of the Pharaoh,Sacred Rites,"INV_2,INV_2|PERIL"
-Omens of the Pharaoh,Unearthed Creature,"INV_2,INV_1|PERIL,SCROLL"
-Omens of the Pharaoh,Sudden Storm,"INV_1>INV_1,TERROR+SCROLL>SCROLL,TERROR+PERIL"
-Omens of the Pharaoh,River of Fear,"SCROLL+PERIL,TERROR+PERIL|TERROR+SCROLL,SCROLL+PERIL"
-Omens of the Pharaoh,Plague Unleashed,"INV_2,TERROR|PERIL,TERROR,TERROR+SCROLL"
-Omens of the Pharaoh,Sandstorm,"INV_2,INV_1>PERIL,PERIL>SCROLL"
-Omens of the Pharaoh,Thief's Regret,"INV_4,INV_4"
-Omens of the Pharaoh,Skull and Shadow,"INV_4,PERIL|INV_4"
-Omens of the Pharaoh,Locusts Over Cairo,"TERROR,TERROR|SCROLL,SCROLL"
-Omens of the Pharaoh,Dark Medicine,"PERIL,SCROLL|SCROLL,TERROR"
-Omens of the Pharaoh,Harried Flight,"INV_7,TERROR"
-Omens of the Pharaoh,Desert Oasis,"PERIL,SCROLL,TERROR"
-Omens of the Pharaoh,Eldritch Gate,INV_3|INV_3
-Omens of the Pharaoh,Something's Out There,"INV_5>TERROR,TERROR"
-Omens of the Pharaoh,Desert Jewel,"SCROLL+PERIL,TERROR+PERIL|INV_1,SCROLL+PERIL,TERROR+PERIL"
-Omens of the Pharaoh,Sandswept Ruins,"INV_3|INV_1,SCROLL+PERIL,TERROR+SCROLL"
-Omens of the Pharaoh,Final Mistake,"PERIL,PERIL,SCROLL+PERIL,TERROR+PERIL"
-Omens of the Pharaoh,Lost,"INV_2,INV_2|INV_3,TERROR"
-Omens of the Pharaoh,The Priest,"TERROR+PERIL,TERROR+PERIL,TERROR+PERIL"
-Omens of the Pharaoh,Visage of Sebek,INV_8|TERROR|SCROLL
-Omens of the Pharaoh,Untouched Vault,"INV_3|SCROLL+PERIL,TERROR+PERIL,TERROR+SCROLL"
-Omens of the Pharaoh,Unsettling Mural,"PERIL,PERIL,PERIL|INV_2,INV_2"
-Omens of the Pharaoh,Under the Lid,INV_8|TERROR
-Omens of the Pharaoh,Profane Ward,"SCROLL,SCROLL,SCROLL"
-Omens of the Pharaoh,In Cold Blood,"TERROR+PERIL,PERIL,TERROR|INV_2"
-Omens of the Pharaoh,One by One,INV_9>INV_3>TERROR
-Omens of the Pharaoh,Lost Explorer,"INV_4,INV_3,INV_2,INV_1"
-Omens of the Pharaoh,Stricken From History,"INV_1>SCROLL,SCROLL>SCROLL,TERROR+PERIL,TERROR"
-Omens of the Pharaoh,Too Late,"INV_2,TERROR|PERIL,SCROLL"
-Omens of the Pharaoh,Aspect of Nyarlathotep,"INV_4,TERROR,TERROR"
-Omens of the Pharaoh,Stone of Souls,"PERIL,SCROLL|TERROR,TERROR|INV_2,INV_2"
-Omens of the Pharaoh,The Black Wind,"PERIL,PERIL,PERIL"
-Omens of the Pharaoh,Eclipse,INV_3|PERIL
-Omens of the Pharaoh,The Bloody Tongue,"TERROR|PERIL,TERROR|SCROLL,TERROR+PERIL"
-Omens of the Pharaoh,Opening the Eye,INV_9
-Omens of the Pharaoh,The Darkest Night,"SCROLL,SCROLL|INV_5,INV_4"
-Omens of the Pharaoh,Form of the Beast,"SCROLL+PERIL,PERIL>INV_3,PERIL"
-Omens of the Pharaoh,Evil Unleashed,"SCROLL,SCROLL|SCROLL+PERIL,PERIL"
-Omens of the Pharaoh,Form of the Serpent,"TERROR+PERIL,SCROLL>INV_3,SCROLL"
-Omens of the Pharaoh,Pharaoh's Curse,"INV_3,SCROLL|INV_3,PERIL"
-Omens of the Pharaoh,Chamber of Midnight,"INV_2,INV_2|INV_2,INV_2,INV_2"
-Omens of the Pharaoh,Chamber of Sacrifice,"TERROR|TERROR,TERROR+PERIL|TERROR,TERROR+PERIL,PERIL"
-Omens of the Pharaoh,Chamber of the Sun,"INV_2,SCROLL|INV_2,SCROLL|INV_2,SCROLL"
-Omens of the Pharaoh,Chamber of the Gate,"INV_3,SCROLL|INV_3,TERROR+PERIL,TERROR+PERIL"
-Omens of the Deep,Calling,"TERROR|INV_2,SCROLL"
-Omens of the Deep,Echoes of the Dream,"TERROR+PERIL,TERROR+SCROLL>INV_1,INV_2,PERIL"
-Omens of the Deep,Mutated Fisherman,"TERROR>PERIL,PERIL"
-Omens of the Deep,Transformation,"INV_1,INV_2|SCROLL"
-Omens of the Deep,Ritual Dance,"INV_1,TERROR+PERIL|INV_1,TERROR+SCROLL"
-Omens of the Deep,Rite of the Sea,"INV_3,SCROLL,SCROLL"
-Omens of the Deep,Blood Pact,INV_2>INV_3
-Omens of the Deep,Abandoned Shack,"INV_4|TERROR+SCROLL,PERIL"
-Omens of the Deep,Sunken Temple,"INV_4,SCROLL"
-Omens of the Deep,Cavern of Eyes,"TERROR+PERIL,TERROR+PERIL"
-Omens of the Deep,Idol of R'lyeh,TERROR|INV_4
-Omens of the Deep,Blasted Ruins,"TERROR|SCROLL,SCROLL"
-Omens of the Deep,Coral Reef,"INV_2>SCROLL,TERROR"
-Omens of the Deep,Ancient City,"SCROLL+PERIL,SCROLL+PERIL,TERROR+PERIL"
-Omens of the Deep,Pirate Attack,PERIL|PERIL
-Omens of the Deep,Homesick,SCROLL|INV_3
-Omens of the Deep,Grasping Tentacles,"INV_2,PERIL,PERIL"
-Omens of the Deep,Visions of Death,INV_6
-Omens of the Deep,Deep One Ambush,"INV_2|TERROR+PERIL,PERIL"
-Omens of the Deep,Mutiny,"TERROR|PERIL,INV_2|SCROLL"
-Omens of the Deep,Deep One Raiders,"TERROR+PERIL,PERIL"
-Omens of the Deep,Ravenous Deep One,"INV_6,PERIL"
-Omens of the Deep,Devious Skulker,"INV_4>TERROR>SCROLL+PERIL,SCROLL+PERIL"
-Omens of the Deep,Shrieking Deep One,"TERROR|INV_3,PERIL"
-Omens of the Deep,Arcane Binding,"INV_3,SCROLL,SCROLL"
-Omens of the Deep,Bloodlust,"SCROLL+PERIL,TERROR+SCROLL|SCROLL+PERIL,TERROR+SCROLL"
-Omens of the Deep,Fooding Frenzy,"PERIL,TERROR|PERIL"
-Omens of the Deep,Those Time Forgot,"SCROLL,TERROR>INV_1,SCROLL,SCROLL"
-Omens of the Deep,Unnatural Storm,"INV_6|PERIL,PERIL"
-Omens of the Deep,Cthylla Whispers,"TERROR>PERIL>SCROLL+PERIL,SCROLL"
-Omens of the Deep,Maelstrom,"INV_1>SCROLL,SCROLL>INV_1,INV_1"
-Omens of the Deep,Heeding the Call,"TERROR|PERIL,SCROLL"
-Omens of the Deep,R'lyeh Risen,"TERROR+PERIL,TERROR+PERIL>INV_5,SCROLL"
-Omens of the Deep,The Sleeper Wakes,"INV_3,SCROLL,TERROR|INV_3,PERIL,TERROR"
-Omens of the Deep,Molten Elder Sign,"SCROLL,SCROLL>TERROR,TERROR"
-Omens of the Deep,Carved Warning,INV_4|INV_4|TERROR
-Omens of the Deep,Final Resting Place,"TERROR|PERIL,PERIL,INV_6"
-Omens of the Deep,Footprints in the Sand,INV_2>INV_3>INV_4
-Omens of the Deep,Not Alone,"INV_2|TERROR+PERIL,TERROR+PERIL,TERROR+PERIL"
-Omens of the Deep,Low Tide,"INV_3>SCROLL,SCROLL"
-Omens of the Deep,Sudden Maddness,"TERROR+PERIL,TERROR+SCROLL|TERROR+PERIL,TERROR+SCROLL"
-Omens of the Deep,Ever Watching,"INV_3,TERROR|PERIL,PERIL"
-Omens of the Deep,Ornate Chest,"INV_6>SCROLL+PERIL,SCROLL+PERIL"
-Omens of the Deep,Surrounded,"TERROR|TERROR+PERIL|PERIL,PERIL"
-Omens of the Deep,Onyx Guardians,SCROLL|SCROLL|SCROLL
-Omens of the Deep,Font of Nightmares,"INV_3,SCROLL,SCROLL|PERIL"
-Omens of the Deep,Summond to Serve,"SCROLL+PERIL,SCROLL+PERIL|TERROR+PERIL,TERROR+PERIL,PERIL"
-Omens of the Deep,Death From Above,"INV_6|TERROR+PERIL,PERIL"
-Omens of the Deep,Out of the Darkness,"INV_2,INV_2,INV_2|TERROR|SCROLL"
-Omens of the Deep,Crystallized Horror,"TERROR+PERIL|INV_1,INV_2,SCROLL|SCROLL"
-Omens of the Deep,Run!,SCROLL+PERIL>TERROR+SCROLL>TERROR+PERIL
-Omens of the Deep,Sleeping Giant,"INV_5|TERROR+SCROLL,TERROR+SCROLL,TERROR"
-Omens of the Deep,Eldritch Summoning,"INV_3,TERROR+PERIL,PERIL|TERROR+PERIL,TERROR"
-Omens of the Deep,Horrific Statuette,"INV_2,SCROLL+PERIL|INV_2,SCROLL+PERIL|INV_2"
-Omens of the Deep,The Beast Within,"TERROR,TERROR+PERIL"
-Omens of the Deep,Lost Arcana,"INV_8,SCROLL,SCROLL"
-Omens of the Deep,The Dream,"TERROR|INV_4|SCROLL,SCROLL"
-Omens of the Deep,Sanctuary,"PERIL,PERIL>INV_5"
-Omens of the Deep,Reality Fracture,"INV_7,SCROLL"
-Omens of the Deep,Corruption,"INV_3,PERIL,TERROR|PERIL"
-Omens of the Deep,Unbound Nightmare,"TERROR+SCROLL,TERROR+SCROLL|INV_5,PERIL"
-Omens of the Deep,Oppressive Silence,"INV_4,PERIL,PERIL"
-Omens of the Deep,Crystal of the Elder Things,"INV_3,SCROLL|PERIL|INV_1"
-Omens of the Deep,Echoes of the Past,"INV_2,INV_1>INV_2,SCROLL"
+﻿Expansion,Name,Tasks,TerrorEffect
+Core,The Curator,"SCROLL,SCROLL,SCROLL|SCROLL,INV_3",NONE
+Core,Koi Pond,"TERROR|TERROR,PERIL,PERIL",IMMEDIATE_FAIL
+Core,Hallway on Fire,PERIL>PERIL,NONE
+Core,Late Night Break-In,INV_3|INV_6,NONE
+Core,Lights Out,"INV_3>PERIL,PERIL>SCROLL,SCROLL",NONE
+Core,Horrible Visions,"PERIL,TERROR|SCROLL,PERIL",NONE
+Core,Did You Hear That?,"PERIL|PERIL,PERIL",NONE
+Core,Gate to Elsewhere,"SCROLL|SCROLL,SCROLL",NONE
+Core,When Night Falls,"TERROR|PERIL,SCROLL,SCROLL",NONE
+Core,You Become that Which You Fear Most,"TERROR,TERROR,TERROR",NONE
+Core,Don't Fall Asleep,"TERROR|TERROR,TERROR",NONE
+Core,Unnatural Habitat,"PERIL,PERIL,INV_3",NONE
+Core,Ancient Relics,"SCROLL,INV_3|SCROLL,INV_3",NONE
+Core,Transported By Magic,"INV_6|SCROLL,SCROLL",NONE
+Core,The Graveyard,PERIL|TERROR|INV_7,DISCARD_ALL_TERROR
+Core,There's Something in the Basement,INV_6|SCROLL|TERROR,NONE
+Core,Vermin in the Pipes,"INV_3|INV_3|INV_3,PERIL",NONE
+Core,Gala in the Great Hall,"INV_2,SCROLL,PERIL|INV_3",NONE
+Core,Forgotten Knowledge,"SCROLL|TERROR,INV_8",NONE
+Core,The Missing Records,"INV_6|SCROLL,INV_3",NONE
+Core,A Peculiar Specimen,INV_3>INV_6>PERIL,NONE
+Core,The Loading Dock,"PERIL|PERIL,INV_3",DISCARD_ALL_TERROR
+Core,Haunted by a Shadowy Figure,"PERIL,TERROR",NONE
+Core,A Secret Gathering,"INV_6|SCROLL,SCROLL",NONE
+Core,Stay Away From The Windows,"INV_8|PERIL,PERIL",NONE
+Core,The Hedge Maze,"INV_2,PERIL|PERIL,PERIL",NONE
+Core,The Hidden Passage,"INV_3>PERIL,INV_3>SCROLL",NONE
+Core,Blood On The Floor,"INV_2>INV_3>TERROR,PERIL",NONE
+Core,The Storage Closet,"INV_3>INV_3>SCROLL,SCROLL",NONE
+Core,Something Has Broken Free,"PERIL|TERROR,TERROR",NONE
+Core,Administration Office,SCROLL|INV_9,NONE
+Core,The Archives,"SCROLL|SCROLL,INV_3|SCROLL,PERIL",NONE
+Core,Riot In The Streets,INV_3>INV_9,NONE
+Core,The Gift Shop,"INV_3>SCROLL,INV_3",NONE
+Core,The Security Office,INV_2>INV_3>INV_6,NONE
+Core,Public Lavatory,"PERIL,SCROLL,SCROLL",NONE
+Core,The Hall of the Dead,"SCROLL|PERIL,PERIL|INV_5",NONE
+Core,The Guided Tour,INV_2>INV_4>SCROLL,NONE
+Core,A Terrible Discovery,"INV_3,TERROR|SCROLL,SCROLL",NONE
+Core,We Need to Find Help,"PERIL,PERIL,SCROLL,INV_3",NONE
+Core,Medusa Exhibit,TERROR>SCROLL>INV_7,DISCARD_ALL_TERROR
+Core,Please Do Not Touch the Exhibits,"TERROR,TERROR|PERIL,PERIL",NONE
+Core,Remians of the High Priest,"PERIL|SCROLL,INV_6",DISCARD_ALL_TERROR
+Core,Tempest in a Teapot,"INV_4>TERROR>PERIL,SCROLL",NONE
+Core,Mysterious Tome,"INV_3,TERROR|SCROLL,SCROLL",NONE
+Core,The Key to the Beyond,"INV_3>SCROLL,PERIL,INV_2",NONE
+Core,The Writing on the Wall,"SCROLL,PERIL,INV_5",NONE
+Unseen Forces,Strange Robberies,"INV_4|PERIL,SCROLL,PERIL",NONE
+Unseen Forces,It's Got Me,"INV_3,PERIL,TERROR",NONE
+Unseen Forces,Vision of Demise,"SCROLL,SCROLL|TERROR,TERROR",NONE
+Unseen Forces,Balancing Mind and Body,"SCROLL,PERIL|PERIL,SCROLL",NONE
+Unseen Forces,Slithering Shadows,"INV_5|PERIL,PERIL,PERIL",NONE
+Unseen Forces,Rite of Passage,"PERIL>SCROLL>INV_3,TERROR",NONE
+Unseen Forces,Sudden Attack,"PERIL|INV_3,PERIL",NONE
+Unseen Forces,Mysterious Puzzle Box,SCROLL,NONE
+Unseen Forces,The Door is Ajar,PERIL|INV_2|INV_7,NONE
+Unseen Forces,Lingering Curse,"INV_3|SCROLL,SCROLL,PERIL",NONE
+Unseen Forces,Just Sign Here,SCROLL|PERIL|INV_3,NONE
+Unseen Forces,In the Stacks,"PERIL,TERROR|TERROR",NONE
+Unseen Forces,The Hidden Temple,"INV_5>INV_3,SCROLL,PERIL",NONE
+Unseen Forces,The Director's Safe,"INV_2,PERIL|PERIL,PERIL",NONE
+Unseen Forces,Test of Faith,"INV_6|INV_3,PERIL",NONE
+Unseen Forces,Prized Display,TERROR|PERIL|SCROLL,NONE
+Unseen Forces,Seeking Leads,"INV_1>PERIL>PERIL,SCROLL",NONE
+Unseen Forces,Break on Through,"SCROLL|INV_3,SCROLL",NONE
+Unseen Forces,Midnight Visitor,"PERIL,PERIL|PERIL,TERROR",NONE
+Unseen Forces,Visiting Antiquarian,"SCROLL,PERIL|SCROLL",NONE
+Unseen Forces,…Too Quiet,"SCROLL,TERROR|TERROR,TERROR",NONE
+Unseen Forces,Fragments of Knowledge,"INV_6|TERROR|SCROLL,SCROLL",NONE
+Unseen Forces,Bloody Footprints,"PERIL,PERIL|SCROLL,SCROLL|TERROR",NONE
+Unseen Forces,Up on the Roof,"TERROR,PERIL,SCROLL",NONE
+Unseen Forces,Fickle Fates,"SCROLL,SCROLL|INV_2,SCROLL",NONE
+Unseen Forces,The Boiler Room,"INV_4,TERROR|PERIL,TERROR",NONE
+Unseen Forces,Heroic Rescue,"PERIL>TERROR,TERROR,TERROR",NONE
+Unseen Forces,Crazed Writings,INV_4|TERROR|SCROLL,NONE
+Unseen Forces,Recruiting Aid,INV_3>INV_6>INV_9,NONE
+Unseen Forces,The True History,"INV_3,SCROLL|SCROLL,SCROLL",NONE
+Unseen Forces,Walking the Ledge,"PERIL>PERIL>PERIL,PERIL",NONE
+Unseen Forces,Wicked Old Man,"INV_1,SCROLL,TERROR|INV_3,TERROR",NONE
+Unseen Forces,Ominous Portents,"SCROLL,SCROLL,SCROLL",NONE
+Unseen Forces,Under Construction,"PERIL|SCROLL,SCROLL",NONE
+Unseen Forces,The Night Watchman,"PERIL,PERIL|PERIL",NONE
+Unseen Forces,The Elder Sign,"SCROLL>SCROLL>INV_2,SCROLL",NONE
+Unseen Forces,Dreaming of a Stranger,"SCROLL,SCROLL,PERIL>TERROR",NONE
+Unseen Forces,It's Quiet,INV_12,NONE
+Unseen Forces,Walled Up,"INV_2,TERROR|INV_6",NONE
+Unseen Forces,Repugnant Tome,"SCROLL,SCROLL>SCROLL",NONE
+Unseen Forces,Vital Information,TERROR>SCROLL>INV_3,NONE
+Other Worlds,City of the Great Race,"INV_3|TERROR,SCROLL,PERIL",NONE
+Other Worlds,Lost Carcosa,"TERROR,TERROR,TERROR|INV_5",NONE
+Other Worlds,Plateau of Leng,"SCROLL,TERROR|TERROR,PERIL,TERROR",NONE
+Other Worlds,The Dreamlands,"PERIL,SCROLL,INV_3",NONE
+Other Worlds,Yuggoth,"PERIL,TERROR|INV_8",NONE
+Other Worlds,Another Time,"SCROLL,SCROLL|INV_3",NONE
+Other Worlds,Another Dimension,"SCROLL,INV_1|TERROR,PERIL",NONE
+Other Worlds,Great Hall of Celeano,TERROR|SCROLL|INV_6,NONE
+Other Worlds,R'lyeh,"INV_1,INV_1|SCROLL,SCROLL,PERIL,TERROR",NONE
+Other Worlds,The Abyss,"PERIL,TERROR|SCROLL,SCROLL,PERIL",NONE
+Other Worlds,City of Gugs,"INV_3,INV_3,PERIL|PERIL,PERIL,TERROR",NONE
+Other Worlds,Ancient Sarnath,"INV_4,TERROR|INV_3,TERROR,SCROLL",NONE
+Other Worlds,Lost in Time and Space,"INV_5|INV_3,TERROR",NONE
+Other Worlds,The Vaults of Zin,"PERIL,TERROR,TERROR",NONE
+Other Worlds,Far Side of the Moon,"INV_6|INV_6,SCROLL",IMMEDIATE_FAIL
+Other Worlds,Ancient Egypt,"INV_3,SCROLL|INV_4,SCROLL",NONE
+Other Worlds,Unknown Kadath,"TERROR,TERROR+PERIL>TERROR,TERROR>SCROLL,TERROR+SCROLL",NONE
+Other Worlds,The Great Temple,"PERIL,PERIL|PERIL,PERIL,TERROR+PERIL",NONE
+Omens of Ice,Impossible Cavern,"INV_1,SCROLL|INV_2|INV_3,SCROLL",NONE
+Omens of Ice,At the Window,"INV_5>TERROR+PERIL,PERIL",NONE
+Omens of Ice,The Midnight Sun,"SCROLL,SCROLL|INV_4,PERIL",NONE
+Omens of Ice,Larder of Bones,"INV_2,PERIL,PERIL|INV_2,TERROR",NONE
+Omens of Ice,Hunting Party,"INV_1,SCROLL|PERIL,PERIL",NONE
+Omens of Ice,Arctic Fog,"INV_1>INV_2>INV_2,PERIL",NONE
+Omens of Ice,Swallowed Below,"INV_3,TERROR|INV_4,PERIL",NONE
+Omens of Ice,The Light Within,"TERROR+SCROLL,SCROLL,INV_1|TERROR+SCROLL,TERROR",NONE
+Omens of Ice,Snow Graves,"INV_4,TERROR,SCROLL,SCROLL",NONE
+Omens of Ice,Frigid Seas,"INV_2,TERROR>INV_2,PERIL",NONE
+Omens of Ice,Avalanche,"PERIL,PERIL,PERIL,TERROR",NONE
+Omens of Ice,Spawn of Ithaqua,"TERROR+SCROLL|INV_2,TERROR+PERIL,TERROR+PERIL|PERIL,TERROR",NONE
+Omens of Ice,The Frozen Temple,"INV_2,TERROR+SCROLL,TERROR,TERROR|INV_2,TERROR+SCROLL",NONE
+Omens of Ice,Dangerous Passage,"PERIL,PERIL|INV_2,TERROR",NONE
+Omens of Ice,Call of the Northern Lights,"SCROLL,SCROLL>INV_9",NONE
+Omens of Ice,The Storm,"INV_4,PERIL,PERIL|INV_4",NONE
+Omens of Ice,Summon The Storm,"INV_2,TERROR+SCROLL,SCROLL,SCROLL",NONE
+Omens of Ice,Ancient Obelisk,"INV_2,SCROLL|INV_5,SCROLL",NONE
+Omens of Ice,Black Out,"INV_3,SCROLL|PERIL|PERIL,TERROR",NONE
+Omens of Ice,Murder in the Night,"INV_4,SCROLL|TERROR,TERROR",NONE
+Omens of Ice,Unnatural Habitat,"TERROR+PERIL,TERROR+PERIL,PERIL|INV_1",NONE
+Omens of Ice,Ford's Terror,"INV_3,TERROR>PERIL,TERROR",NONE
+Omens of Ice,Endless Night,"INV_7,TERROR|TERROR,TERROR",NONE
+Omens of Ice,Cracks in the Ice,"INV_2|PERIL,SCROLL,TERROR",NONE
+Omens of Ice,Poisoned Land,"INV_1,PERIL|INV_5,PERIL",NONE
+Omens of Ice,Nowhere Left to Go,"PERIL,SCROLL|INV_2,TERROR",NONE
+Omens of Ice,Force of Nature,"PERIL,PERIL,TERROR|TERROR",NONE
+Omens of Ice,Cavern of the Bound,PERIL|TERROR|SCROLL,NONE
+Omens of Ice,Native Warning,"INV_3,TERROR>INV_3,SCROLL",NONE
+Omens of Ice,Chest of Winter,"INV_2,TERROR+SCROLL|SCROLL,SCROLL,TERROR+SCROLL",NONE
+Omens of Ice,The Forgotten Explorer,"INV_2,PERIL,PERIL,TERROR|TERROR+PERIL",NONE
+Omens of Ice,The Pillar of Secrets,"INV_2,INV_1,INV_1|INV_3,INV_2,INV_1",NONE
+Omens of Ice,Winter's Song,"INV_1,INV_2,TERROR",NONE
+Omens of Ice,Sabotage,"INV_2,PERIL|PERIL",NONE
+Omens of Ice,Barnette's Trading Post,INV_2|INV_4,NONE
+Omens of Ice,Corrupted Trapper,"INV_2,SCROLL|INV_3",NONE
+Omens of Ice,Visiting Expert,"INV_2,SCROLL,SCROLL|INV_2",NONE
+Omens of Ice,Bone Carver,"INV_2,SCROLL|INV_4,PERIL",NONE
+Omens of Ice,Public Support,INV_1>INV_2>INV_3,NONE
+Omens of Ice,Frostbite,"INV_1,INV_1,INV_1",NONE
+Omens of Ice,Last Breath,"INV_4,TERROR,TERROR",NONE
+Omens of Ice,Cabin Fever,INV_2|SCROLL|TERROR,NONE
+Omens of Ice,Private Collection,"INV_3,TERROR+SCROLL|INV_2,SCROLL",NONE
+Omens of Ice,Food Shortage,"INV_3,PERIL|INV_4",NONE
+Omens of Ice,White Out,"INV_2|PERIL|TERROR,SCROLL",NONE
+Omens of Ice,Northern Tales,"TERROR+SCROLL,TERROR+SCROLL|TERROR+PERIL,TERROR|PERIL",NONE
+Omens of Ice,Frozen,"INV_2,PERIL,SCROLL",NONE
+Omens of Ice,Obsessive Greed,"INV_3,TERROR|INV_3,PERIL",NONE
+Omens of Ice,Through the Ice,"INV_4|PERIL,PERIL",NONE
+Omens of Ice,Warning in Inuktitut,"TERROR+SCROLL,SCROLL|INV_2",NONE
+Omens of Ice,Death Below,"PERIL,TERROR,INV_2",NONE
+Omens of Ice,The Road to Elsewhere,"INV_1>INV_2>SCROLL,SCROLL",NONE
+Omens of Ice,Frozen in Time,"INV_4,SCROLL|PERIL,TERROR",NONE
+Omens of Ice,Eureka Cafe,INV_2|INV_4,NONE
+Omens of Ice,Hall of Totems,"INV_1,INV_1,TERROR,SCROLL",NONE
+Omens of Ice,Finding the Way,"INV_1,SCROLL>INV_1,INV_2,INV_3",NONE
+Omens of Ice,Unnatural Blizzard,"INV_1,PERIL|INV_4",NONE
+Omens of Ice,Blood in the Snow,"INV_4,TERROR|PERIL+SCROLL",NONE
+Omens of Ice,Refuge of Faith,"INV_2,TERROR|SCROLL",NONE
+Omens of Ice,Hunter of Men,"PERIL,SCROLL>PERIL,TERROR",NONE
+Omens of Ice,Heart of Darkness,"INV_1,TERROR+SCROLL,TERROR+SCROLL,TERROR+SCROLL|INV_1,TERROR+PERIL,TERROR+PERIL,TERROR+PERIL",NONE
+Omens of Ice,Treacherous Ascent,"INV_1,INV_2,INV_3>TERROR+SCROLL,PERIL+SCROLL,TERROR+PERIL",NONE
+Omens of Ice,Into the Wild,SCROLL>INV_3>PERIL,NONE
+Omens of Ice,Arrival,"INV_2,INV_2>INV_3",NONE
+Omens of the Pharaoh,Uneasy Journey,SCROLL|PERIL|SCROLL+PERIL,NONE
+Omens of the Pharaoh,Exhibit Storage,"TERROR>PERIL,TERROR+PERIL",NONE
+Omens of the Pharaoh,Chance Encounter,"SCROLL,SCROLL",NONE
+Omens of the Pharaoh,Planning the Dig,"INV_3|SCROLL+PERIL,TERROR+PERIL",NONE
+Omens of the Pharaoh,A Meeting of Minds,"INV_2,INV_1|INV_2,INV_1",NONE
+Omens of the Pharaoh,Trouble in the Bazaar,"INV_2,INV_1,SCROLL+PERIL|TERROR",NONE
+Omens of the Pharaoh,Brazen Stalker,INV_3|INV_3|INV_3,NONE
+Omens of the Pharaoh,Corner Gift Shop,"INV_3,SCROLL+PERIL,TERROR+PERIL,TERROR+SCROLL",NONE
+Omens of the Pharaoh,The Golden Scarab,"INV_1,TERROR+PERIL|INV_2,TERROR+SCROLL",NONE
+Omens of the Pharaoh,Seedy Wares,"INV_3,INV_2,INV_1",NONE
+Omens of the Pharaoh,Lost in Thought,"INV_1>PERIL,SCROLL,TERROR",NONE
+Omens of the Pharaoh,Book of the Dead,"INV_2,SCROLL|PERIL",NONE
+Omens of the Pharaoh,Cursed Figurine,SCROLL|SCROLL,NONE
+Omens of the Pharaoh,Temple Courtyard,INV_6,NONE
+Omens of the Pharaoh,Sacred Rites,"INV_2,INV_2|PERIL",NONE
+Omens of the Pharaoh,Unearthed Creature,"INV_2,INV_1|PERIL,SCROLL",NONE
+Omens of the Pharaoh,Sudden Storm,"INV_1>INV_1,TERROR+SCROLL>SCROLL,TERROR+PERIL",NONE
+Omens of the Pharaoh,River of Fear,"SCROLL+PERIL,TERROR+PERIL|TERROR+SCROLL,SCROLL+PERIL",NONE
+Omens of the Pharaoh,Plague Unleashed,"INV_2,TERROR|PERIL,TERROR,TERROR+SCROLL",NONE
+Omens of the Pharaoh,Sandstorm,"INV_2,INV_1>PERIL,PERIL>SCROLL",NONE
+Omens of the Pharaoh,Thief's Regret,"INV_4,INV_4",NONE
+Omens of the Pharaoh,Skull and Shadow,"INV_4,PERIL|INV_4",NONE
+Omens of the Pharaoh,Locusts Over Cairo,"TERROR,TERROR|SCROLL,SCROLL",NONE
+Omens of the Pharaoh,Dark Medicine,"PERIL,SCROLL|SCROLL,TERROR",NONE
+Omens of the Pharaoh,Harried Flight,"INV_7,TERROR",NONE
+Omens of the Pharaoh,Desert Oasis,"PERIL,SCROLL,TERROR",NONE
+Omens of the Pharaoh,Eldritch Gate,INV_3|INV_3,NONE
+Omens of the Pharaoh,Something's Out There,"INV_5>TERROR,TERROR",NONE
+Omens of the Pharaoh,Desert Jewel,"SCROLL+PERIL,TERROR+PERIL|INV_1,SCROLL+PERIL,TERROR+PERIL",NONE
+Omens of the Pharaoh,Sandswept Ruins,"INV_3|INV_1,SCROLL+PERIL,TERROR+SCROLL",NONE
+Omens of the Pharaoh,Final Mistake,"PERIL,PERIL,SCROLL+PERIL,TERROR+PERIL",NONE
+Omens of the Pharaoh,Lost,"INV_2,INV_2|INV_3,TERROR",NONE
+Omens of the Pharaoh,The Priest,"TERROR+PERIL,TERROR+PERIL,TERROR+PERIL",NONE
+Omens of the Pharaoh,Visage of Sebek,INV_8|TERROR|SCROLL,NONE
+Omens of the Pharaoh,Untouched Vault,"INV_3|SCROLL+PERIL,TERROR+PERIL,TERROR+SCROLL",NONE
+Omens of the Pharaoh,Unsettling Mural,"PERIL,PERIL,PERIL|INV_2,INV_2",NONE
+Omens of the Pharaoh,Under the Lid,INV_8|TERROR,NONE
+Omens of the Pharaoh,Profane Ward,"SCROLL,SCROLL,SCROLL",NONE
+Omens of the Pharaoh,In Cold Blood,"TERROR+PERIL,PERIL,TERROR|INV_2",NONE
+Omens of the Pharaoh,One by One,INV_9>INV_3>TERROR,NONE
+Omens of the Pharaoh,Lost Explorer,"INV_4,INV_3,INV_2,INV_1",NONE
+Omens of the Pharaoh,Stricken From History,"INV_1>SCROLL,SCROLL>SCROLL,TERROR+PERIL,TERROR",NONE
+Omens of the Pharaoh,Too Late,"INV_2,TERROR|PERIL,SCROLL",NONE
+Omens of the Pharaoh,Aspect of Nyarlathotep,"INV_4,TERROR,TERROR",NONE
+Omens of the Pharaoh,Stone of Souls,"PERIL,SCROLL|TERROR,TERROR|INV_2,INV_2",NONE
+Omens of the Pharaoh,The Black Wind,"PERIL,PERIL,PERIL",NONE
+Omens of the Pharaoh,Eclipse,INV_3|PERIL,NONE
+Omens of the Pharaoh,The Bloody Tongue,"TERROR|PERIL,TERROR|SCROLL,TERROR+PERIL",NONE
+Omens of the Pharaoh,Opening the Eye,INV_9,NONE
+Omens of the Pharaoh,The Darkest Night,"SCROLL,SCROLL|INV_5,INV_4",NONE
+Omens of the Pharaoh,Form of the Beast,"SCROLL+PERIL,PERIL>INV_3,PERIL",NONE
+Omens of the Pharaoh,Evil Unleashed,"SCROLL,SCROLL|SCROLL+PERIL,PERIL",NONE
+Omens of the Pharaoh,Form of the Serpent,"TERROR+PERIL,SCROLL>INV_3,SCROLL",NONE
+Omens of the Pharaoh,Pharaoh's Curse,"INV_3,SCROLL|INV_3,PERIL",NONE
+Omens of the Pharaoh,Chamber of Midnight,"INV_2,INV_2|INV_2,INV_2,INV_2",NONE
+Omens of the Pharaoh,Chamber of Sacrifice,"TERROR|TERROR,TERROR+PERIL|TERROR,TERROR+PERIL,PERIL",NONE
+Omens of the Pharaoh,Chamber of the Sun,"INV_2,SCROLL|INV_2,SCROLL|INV_2,SCROLL",NONE
+Omens of the Pharaoh,Chamber of the Gate,"INV_3,SCROLL|INV_3,TERROR+PERIL,TERROR+PERIL",NONE
+Omens of the Deep,Calling,"TERROR|INV_2,SCROLL",NONE
+Omens of the Deep,Echoes of the Dream,"TERROR+PERIL,TERROR+SCROLL>INV_1,INV_2,PERIL",NONE
+Omens of the Deep,Mutated Fisherman,"TERROR>PERIL,PERIL",NONE
+Omens of the Deep,Transformation,"INV_1,INV_2|SCROLL",NONE
+Omens of the Deep,Ritual Dance,"INV_1,TERROR+PERIL|INV_1,TERROR+SCROLL",NONE
+Omens of the Deep,Rite of the Sea,"INV_3,SCROLL,SCROLL",NONE
+Omens of the Deep,Blood Pact,INV_2>INV_3,NONE
+Omens of the Deep,Abandoned Shack,"INV_4|TERROR+SCROLL,PERIL",NONE
+Omens of the Deep,Sunken Temple,"INV_4,SCROLL",NONE
+Omens of the Deep,Cavern of Eyes,"TERROR+PERIL,TERROR+PERIL",NONE
+Omens of the Deep,Idol of R'lyeh,TERROR|INV_4,NONE
+Omens of the Deep,Blasted Ruins,"TERROR|SCROLL,SCROLL",NONE
+Omens of the Deep,Coral Reef,"INV_2>SCROLL,TERROR",NONE
+Omens of the Deep,Ancient City,"SCROLL+PERIL,SCROLL+PERIL,TERROR+PERIL",NONE
+Omens of the Deep,Pirate Attack,PERIL|PERIL,NONE
+Omens of the Deep,Homesick,SCROLL|INV_3,NONE
+Omens of the Deep,Grasping Tentacles,"INV_2,PERIL,PERIL",NONE
+Omens of the Deep,Visions of Death,INV_6,NONE
+Omens of the Deep,Deep One Ambush,"INV_2|TERROR+PERIL,PERIL",NONE
+Omens of the Deep,Mutiny,"TERROR|PERIL,INV_2|SCROLL",NONE
+Omens of the Deep,Deep One Raiders,"TERROR+PERIL,PERIL",NONE
+Omens of the Deep,Ravenous Deep One,"INV_6,PERIL",NONE
+Omens of the Deep,Devious Skulker,"INV_4>TERROR>SCROLL+PERIL,SCROLL+PERIL",NONE
+Omens of the Deep,Shrieking Deep One,"TERROR|INV_3,PERIL",NONE
+Omens of the Deep,Arcane Binding,"INV_3,SCROLL,SCROLL",NONE
+Omens of the Deep,Bloodlust,"SCROLL+PERIL,TERROR+SCROLL|SCROLL+PERIL,TERROR+SCROLL",NONE
+Omens of the Deep,Fooding Frenzy,"PERIL,TERROR|PERIL",NONE
+Omens of the Deep,Those Time Forgot,"SCROLL,TERROR>INV_1,SCROLL,SCROLL",NONE
+Omens of the Deep,Unnatural Storm,"INV_6|PERIL,PERIL",NONE
+Omens of the Deep,Cthylla Whispers,"TERROR>PERIL>SCROLL+PERIL,SCROLL",NONE
+Omens of the Deep,Maelstrom,"INV_1>SCROLL,SCROLL>INV_1,INV_1",NONE
+Omens of the Deep,Heeding the Call,"TERROR|PERIL,SCROLL",NONE
+Omens of the Deep,R'lyeh Risen,"TERROR+PERIL,TERROR+PERIL>INV_5,SCROLL",NONE
+Omens of the Deep,The Sleeper Wakes,"INV_3,SCROLL,TERROR|INV_3,PERIL,TERROR",NONE
+Omens of the Deep,Molten Elder Sign,"SCROLL,SCROLL>TERROR,TERROR",NONE
+Omens of the Deep,Carved Warning,INV_4|INV_4|TERROR,NONE
+Omens of the Deep,Final Resting Place,"TERROR|PERIL,PERIL,INV_6",NONE
+Omens of the Deep,Footprints in the Sand,INV_2>INV_3>INV_4,NONE
+Omens of the Deep,Not Alone,"INV_2|TERROR+PERIL,TERROR+PERIL,TERROR+PERIL",NONE
+Omens of the Deep,Low Tide,"INV_3>SCROLL,SCROLL",NONE
+Omens of the Deep,Sudden Maddness,"TERROR+PERIL,TERROR+SCROLL|TERROR+PERIL,TERROR+SCROLL",NONE
+Omens of the Deep,Ever Watching,"INV_3,TERROR|PERIL,PERIL",NONE
+Omens of the Deep,Ornate Chest,"INV_6>SCROLL+PERIL,SCROLL+PERIL",NONE
+Omens of the Deep,Surrounded,"TERROR|TERROR+PERIL|PERIL,PERIL",NONE
+Omens of the Deep,Onyx Guardians,SCROLL|SCROLL|SCROLL,NONE
+Omens of the Deep,Font of Nightmares,"INV_3,SCROLL,SCROLL|PERIL",NONE
+Omens of the Deep,Summond to Serve,"SCROLL+PERIL,SCROLL+PERIL|TERROR+PERIL,TERROR+PERIL,PERIL",NONE
+Omens of the Deep,Death From Above,"INV_6|TERROR+PERIL,PERIL",NONE
+Omens of the Deep,Out of the Darkness,"INV_2,INV_2,INV_2|TERROR|SCROLL",NONE
+Omens of the Deep,Crystallized Horror,"TERROR+PERIL|INV_1,INV_2,SCROLL|SCROLL",NONE
+Omens of the Deep,Run!,SCROLL+PERIL>TERROR+SCROLL>TERROR+PERIL,NONE
+Omens of the Deep,Sleeping Giant,"INV_5|TERROR+SCROLL,TERROR+SCROLL,TERROR",NONE
+Omens of the Deep,Eldritch Summoning,"INV_3,TERROR+PERIL,PERIL|TERROR+PERIL,TERROR",NONE
+Omens of the Deep,Horrific Statuette,"INV_2,SCROLL+PERIL|INV_2,SCROLL+PERIL|INV_2",NONE
+Omens of the Deep,The Beast Within,"TERROR,TERROR+PERIL",NONE
+Omens of the Deep,Lost Arcana,"INV_8,SCROLL,SCROLL",NONE
+Omens of the Deep,The Dream,"TERROR|INV_4|SCROLL,SCROLL",NONE
+Omens of the Deep,Sanctuary,"PERIL,PERIL>INV_5",NONE
+Omens of the Deep,Reality Fracture,"INV_7,SCROLL",NONE
+Omens of the Deep,Corruption,"INV_3,PERIL,TERROR|PERIL",NONE
+Omens of the Deep,Unbound Nightmare,"TERROR+SCROLL,TERROR+SCROLL|INV_5,PERIL",NONE
+Omens of the Deep,Oppressive Silence,"INV_4,PERIL,PERIL",NONE
+Omens of the Deep,Crystal of the Elder Things,"INV_3,SCROLL|PERIL|INV_1",NONE
+Omens of the Deep,Echoes of the Past,"INV_2,INV_1>INV_2,SCROLL",NONE

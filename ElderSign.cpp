@@ -65,9 +65,12 @@ int globalTotalRolls;
 vector<int> globalRoll;
 vector<pair<double, int>> globalProbs;
 
+uint64_t totalRollsToIterate;
+uint64_t totalRollsIterated;
+
 string currentLineText;
 
-double calc(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice);
+double calc(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect);
 vector<vector<int>> getHoldable(vector<vector<int>> tasks, vector<int> roll, int numHold, vector<int> heldDice, bool discardOne);
 
 // returns TRUE when all available dice selected by the mask can be applied to the task
@@ -147,10 +150,10 @@ bool subsetRollMatchesTask(vector<int> roll, int mask, vector<int> task, vector<
 	return mask == 0;
 }
 
-double bestMatchProb(vector<int> roll, vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice) {
+double bestMatchProb(vector<int> roll, vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect) {
 	string key = "";
 	if (largeMemEnabled) {
-		key = rollToString(roll) + serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice);
+		key = rollToString(roll, true) + serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
 		bestMatchMutex.lock();
 		if (bestMatchProbHistory.find(key) != bestMatchProbHistory.end()) {
 			double val = bestMatchProbHistory[key];
@@ -193,7 +196,7 @@ double bestMatchProb(vector<int> roll, vector<vector<int>> tasks, bool inOrder, 
 						_redDie = false;
 					}
 				}
-				double p = calc(_tasks, inOrder, _numGreen, _yellowDie, _redDie, numFocus, numSpell, numClue, _heldDice);
+				double p = calc(_tasks, inOrder, _numGreen, _yellowDie, _redDie, numFocus, numSpell, numClue, _heldDice, terrorEffect);
 				bestProb = max(p, bestProb);
 
 				// successful and spell some dice
@@ -218,7 +221,7 @@ double bestMatchProb(vector<int> roll, vector<vector<int>> tasks, bool inOrder, 
 							}
 						}
 						__heldDice.insert(__heldDice.end(), spelledDice.begin(), spelledDice.end());
-						p = calc(_tasks, inOrder, __numGreen, __yellowDie, __redDie, numFocus, numSpell - spelledDice.size(), numClue, __heldDice);
+						p = calc(_tasks, inOrder, __numGreen, __yellowDie, __redDie, numFocus, numSpell - spelledDice.size(), numClue, __heldDice, terrorEffect);
 						bestProb = max(p, bestProb);
 					}
 				}
@@ -255,7 +258,7 @@ bool hasMinDice(vector<vector<int>> tasks, int numGreen, bool yellowDie, bool re
 	return totalDiceNeeded <= totalDiceHave;
 }
 
-double throwAwayProb(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, vector<int> focusDiceNew, vector<int> spellDiceNew) {
+double throwAwayProb(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, vector<int> focusDiceNew, vector<int> spellDiceNew, int terrorEffect) {
 	int _numGreen = numGreen;
 	bool _yellowDie = yellowDie;
 	bool _redDie = redDie;
@@ -293,8 +296,8 @@ double throwAwayProb(vector<vector<int>> tasks, bool inOrder, int numGreen, bool
 
 	// sometimes it is better to throw a yellow die away (e.g., when needing to roll terrors)
 	if (_numGreen > 0 && _yellowDie) {
-		double throwGreen = calc(tasks, inOrder, _numGreen - 1, _yellowDie, _redDie, numFocus, numSpell, numClue, heldDice);
-		double throwYellow = calc(tasks, inOrder, _numGreen, false, _redDie, numFocus, numSpell, numClue, heldDice);
+		double throwGreen = calc(tasks, inOrder, _numGreen - 1, _yellowDie, _redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
+		double throwYellow = calc(tasks, inOrder, _numGreen, false, _redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
 		return (throwYellow > throwGreen) ? throwYellow : throwGreen;
 	}
 	else {
@@ -308,7 +311,7 @@ double throwAwayProb(vector<vector<int>> tasks, bool inOrder, int numGreen, bool
 		else if (_redDie) {
 			_redDie = false;
 		}
-		return calc(tasks, inOrder, _numGreen, _yellowDie, _redDie, numFocus, numSpell, numClue, heldDice);
+		return calc(tasks, inOrder, _numGreen, _yellowDie, _redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
 	}
 }
 
@@ -427,10 +430,10 @@ vector<vector<int>> getHoldable(vector<vector<int>> tasks, vector<int> roll, int
 	return holdable;
 }
 
-double bestStrategyForRoll(vector<int> roll, vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice) {
+double bestStrategyForRoll(vector<int> roll, vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect) {
 	string key2 = "";
 	if (largeMemEnabled) {
-		key2 = rollToString(roll) + serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice);
+		key2 = rollToString(roll, true) + serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
 		bestSuccessMutex.lock();
 		if (bestSuccessForRollHistory.find(key2) != bestSuccessForRollHistory.end()) {
 			double val = bestSuccessForRollHistory[key2];
@@ -441,94 +444,88 @@ double bestStrategyForRoll(vector<int> roll, vector<vector<int>> tasks, bool inO
 	}
 	
 	// find best fit sub-set of roll to match a task
-	double bestProb = bestMatchProb(roll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice);
-
-	// fail, no focus, use spelledDice
-	vector<vector<int>> spellable = getHoldable(tasks, roll, numSpell, heldDice, true);
-	for (vector<int> spelledDice : spellable) {
-		double p = throwAwayProb(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, vector<int>(), spelledDice);
-		bestProb = max(p, bestProb);
-	}
-
-	// say that we want to or do fail the task, can any be focused?
-	vector<vector<int>> focusable = getHoldable(tasks, roll, numFocus, heldDice, true);
-	for (vector<int> focusedDice : focusable) {
-		double p = throwAwayProb(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, focusedDice, vector<int>());
-		bestProb = max(p, bestProb);
-
-		// get spelledDice
-		vector<int> _roll = roll;
-		removeFromRoll(_roll, focusedDice);
-		vector<int> _heldDice = heldDice;
-		_heldDice.insert(_heldDice.end(), focusedDice.begin(), focusedDice.end());
-		vector<vector<int>> spellable = getHoldable(tasks, _roll, numSpell, _heldDice, false);
-		for (vector<int> spelledDice : spellable) {
-			p = throwAwayProb(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, focusedDice, spelledDice);
-			bestProb = max(p, bestProb);
-		}
-	}
+	double bestProb = bestMatchProb(roll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
 
 	// use a clue
 	// this will recursively call current method in case there are multiple clues
 	if (numClue > 0) {
-		for (int m = 1; m <= roll.size(); m++) {
-			// re-roll n-dice
-			for (int mask = 1; mask < intPow(2, roll.size()); mask++) {
-				if (numBits(mask) != m) {
+		vector<int> reroll = roll;
+		resetRoll(reroll);
+		int totalNewRolls = intPow(6, reroll.size());
+		int n = 0;
+		vector<double> successes = vector<double>();
+		for (int i = 0; i < intPow(2, reroll.size()); i++) {
+			successes.push_back(0.0);
+		}
+
+		for (int j = 0; j < totalNewRolls; j += n) {
+			n = rollCombinations(reroll);
+			double p = bestStrategyForRoll(reroll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue - 1, heldDice, terrorEffect);
+			int diff = distanceDiff(roll, reroll);
+			//int mask = maskDiff(roll, reroll);
+			for (int i = 1; i < successes.size(); i++) {
+				if (diff > numBits(i) || !maskedReroll(roll, reroll, i)) {
 					continue;
 				}
-				
-				double success = 0.0;
-				vector<int> rollKeep = maskRoll(roll, ~mask);
+				successes[i] += rerollCombinations(roll, reroll, i) * p;
+			}
+			incrRoll(reroll);
+		}
 
-				if (largeMemEnabled) {
-					string key3 = rollToString(rollKeep) + key2;
-					bestSuccessMutex.lock();
-					if (bestSuccessForRollHistory.find(key3) != bestSuccessForRollHistory.end()) {
-						success = bestSuccessForRollHistory[key3];
-						bestSuccessMutex.unlock();
-					}
-					else {
-						bestSuccessMutex.unlock();
-						vector<int> rollNew = maskRoll(roll, mask);
-						resetRoll(rollNew);
-						int n = 0;
-						int totalNewRolls = intPow(6, rollNew.size());
-						for (int j = 0; j < totalNewRolls; j += n) {
-							n = rollCombinations(rollNew);
-							vector<int> _roll = rollKeep;
-							_roll.insert(_roll.end(), rollNew.begin(), rollNew.end());
-							sort(_roll.begin(), _roll.end());
+		for (int i = 1; i < successes.size(); i++) {
+			bestProb = max(bestProb, successes[i] / intPow(6, numBits(i)));
+		}
+	}
 
-							double p = bestStrategyForRoll(_roll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue - 1, heldDice);
-							success += n * p / totalNewRolls;
-							incrRoll(rollNew);
-						}
-						bestSuccessMutex.lock();
-						bestSuccessForRollHistory[key3] = success;
-						bestSuccessMutex.unlock();
-					}
-				}
-				else {
-					vector<int> rollNew = maskRoll(roll, mask);
-					resetRoll(rollNew);
-					int n = 0;
-					int totalNewRolls = intPow(6, rollNew.size());
-					for (int j = 0; j < totalNewRolls; j += n) {
-						n = rollCombinations(rollNew);
-						vector<int> _roll = rollKeep;
-						_roll.insert(_roll.end(), rollNew.begin(), rollNew.end());
-						sort(_roll.begin(), _roll.end());
-
-						double p = bestStrategyForRoll(_roll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue - 1, heldDice);
-						success += n * p / totalNewRolls;
-						incrRoll(rollNew);
-					}
-				}
-				bestProb = max(success, bestProb);
+	bool terrorTriggered = false;
+	if (terrorEffect != NONE) {
+		for (int die : roll) {
+			if (die == TERROR) {
+				terrorTriggered = true;
+				break;
 			}
 		}
 	}
+
+	if (!(terrorTriggered && terrorEffect == IMMEDIATE_FAIL)) {
+		if (terrorEffect == DISCARD_ALL_TERROR) {
+			for (int i = roll.size() - 1; i >= 0; i--) {
+				if (roll[i] == TERROR) {
+					numGreen--;
+					roll.erase(roll.begin() + i, roll.begin() + i + 1);
+				}
+			}
+		}
+
+		double p = throwAwayProb(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, vector<int>(), vector<int>(), terrorEffect);
+		bestProb = max(p, bestProb);
+
+		// fail, no focus, use spelledDice
+		vector<vector<int>> spellable = getHoldable(tasks, roll, numSpell, heldDice, true);
+		for (vector<int> spelledDice : spellable) {
+			p = throwAwayProb(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, vector<int>(), spelledDice, terrorEffect);
+			bestProb = max(p, bestProb);
+		}
+
+		// say that we want to or do fail the task, can any be focused?
+		vector<vector<int>> focusable = getHoldable(tasks, roll, numFocus, heldDice, true);
+		for (vector<int> focusedDice : focusable) {
+			p = throwAwayProb(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, focusedDice, vector<int>(), terrorEffect);
+			bestProb = max(p, bestProb);
+
+			// get spelledDice
+			vector<int> _roll = roll;
+			removeFromRoll(_roll, focusedDice);
+			vector<int> _heldDice = heldDice;
+			_heldDice.insert(_heldDice.end(), focusedDice.begin(), focusedDice.end());
+			vector<vector<int>> spellable = getHoldable(tasks, _roll, numSpell, _heldDice, false);
+			for (vector<int> spelledDice : spellable) {
+				p = throwAwayProb(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, focusedDice, spelledDice, terrorEffect);
+				bestProb = max(p, bestProb);
+			}
+		}
+	}
+
 	if (largeMemEnabled) {
 		bestSuccessMutex.lock();
 		bestSuccessForRollHistory[key2] = bestProb;
@@ -537,8 +534,8 @@ double bestStrategyForRoll(vector<int> roll, vector<vector<int>> tasks, bool inO
 	return bestProb;
 }
 
-double calc(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice) {
-	string key = serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice);
+double calc(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect) {
+	string key = serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
 	savedMutex.lock();
 	if (saved.find(key) != saved.end()) {
 		double val = saved[key];
@@ -570,31 +567,28 @@ double calc(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDi
 	int n = 0;
 	double success = 0.0;
 
-	double discardOneProb = throwAwayProb(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, vector<int>(), vector<int>());
-
 	for (int i = 0; i < totalRolls; i += n) {
 		n = rollCombinations(roll);
-		double bestProb = discardOneProb;
-		double p = bestStrategyForRoll(roll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice);
-		bestProb = max(p, bestProb);
-		success += n * bestProb / totalRolls;
+		double p = bestStrategyForRoll(roll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
+		success += n * p;
 		incrRoll(roll);
 	}
+	success /= totalRolls;
 	savedMutex.lock();
 	saved[key] = success;
 	if (savedEnabled) {
-		savedFile << key << "#" << success << endl;
+		savedFile << key << "#" << to_string(success) << endl;
 	}
 	savedMutex.unlock();
 	return success;
 }
 
 // continue running bestStrategyForRoll until no jobs/rolls left
-void launchThread(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice) {
+void launchThread(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect) {
 	int totalRolls = intPow(6, globalRoll.size());
 	while (true) {
 		rootMutex.lock();
-		cout << currentLineText << "..." << (100 * globalTotalRolls / totalRolls) << "%\r" << flush;
+		cout << currentLineText << "..." << (100 * totalRollsIterated / totalRollsToIterate) << "%\r" << flush;
 		// check if done
 		if (globalTotalRolls >= totalRolls) {
 			rootMutex.unlock();
@@ -603,11 +597,12 @@ void launchThread(vector<vector<int>> tasks, bool inOrder, int numGreen, bool ye
 		vector<int> roll = globalRoll;
 		int n = rollCombinations(globalRoll);;
 		globalTotalRolls += n;
+		totalRollsIterated += n;
 		incrRoll(globalRoll);
 		rootMutex.unlock();
 
-		double p = bestStrategyForRoll(roll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice);
-		
+		double p = bestStrategyForRoll(roll, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
+
 		rootMutex.lock();
 		globalProbs.push_back(pair<double, int>(p, n));
 		rootMutex.unlock();
@@ -615,9 +610,59 @@ void launchThread(vector<vector<int>> tasks, bool inOrder, int numGreen, bool ye
 	return;
 }
 
-double calcInit(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue) {
+struct input {
+	int numGreen;
+	bool yellowDie;
+	bool redDie;
+	int numFocus;
+	int numSpell;
+	int numClue;
+	input() {
+		numGreen = 3;
+		yellowDie = false;
+		redDie = false;
+		numFocus = 0;
+		numSpell = 0;
+		numClue = 0;
+	}
+};
+
+bool incrInput(input& i, int maxGreen, bool hasYellow, bool hasRed, int maxFocus, int maxSpell, int maxClue) {
+	if (i.numClue < maxClue) {
+		i.numClue++;
+		return true;
+	}
+	i.numClue = 0;
+	if (i.numSpell < maxSpell) {
+		i.numSpell++;
+		return true;
+	}
+	i.numSpell = 0;
+	if (i.numFocus < maxFocus) {
+		i.numFocus++;
+		return true;
+	}
+	i.numFocus = 0;
+	if (!i.redDie && hasRed) {
+		i.redDie = true;
+		return true;
+	}
+	i.redDie = false;
+	if (!i.yellowDie && hasYellow) {
+		i.yellowDie = true;
+		return true;
+	}
+	i.yellowDie = false;
+	if (i.numGreen < maxGreen) {
+		i.numGreen++;
+		return true;
+	}
+	return false;
+}
+
+double calcInit(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, int terrorEffect) {
 	vector<int> heldDice = vector<int>();
-	string key = serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice);
+	string key = serialize(tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, terrorEffect);
 	if (saved.find(key) != saved.end()) {
 		return saved[key];
 	}
@@ -635,37 +680,52 @@ double calcInit(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yell
 		}
 		return 0.0;
 	}
-
-	globalTotalRolls = 0;
-	globalRoll = initRoll(numGreen, yellowDie, redDie);
-	globalProbs = vector<pair<double,int>>();
-
-	auto throwAwayThread = async(launch::async, throwAwayProb, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice, vector<int>(), vector<int>());
-	vector<thread> threads = vector<thread>();
-
-	// launch n-1 threads because throwAwayProb has its own thread
-	for (int i = 1; i < numThreads; i++) {
-		threads.push_back(thread(launchThread, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice));
+	double success = 0.0;
+	input in = input();
+	totalRollsToIterate = 0;
+	totalRollsIterated = 0;
+	while (incrInput(in, numGreen, yellowDie, redDie, numFocus, numSpell, numClue)) {
+		totalRollsToIterate += intPow(6, in.numGreen + (in.yellowDie ? 1 : 0) + (in.redDie ? 1 : 0));
 	}
+	in = input();
+	while (incrInput(in, numGreen, yellowDie, redDie, numFocus, numSpell, numClue)) {
+		if (in.numGreen + (in.yellowDie ? 1 : 0) + (in.redDie ? 1 : 0) == 0) {
+			continue;
+		}
+		
+		string key2 = serialize(tasks, inOrder, in.numGreen, in.yellowDie, in.redDie, in.numFocus, in.numSpell, in.numClue, heldDice, terrorEffect);
+		if (saved.find(key2) != saved.end()) {
+			totalRollsIterated += intPow(6, in.numGreen + (in.yellowDie ? 1 : 0) + (in.redDie ? 1 : 0));
+			cout << currentLineText << "..." << (100 * totalRollsIterated / totalRollsToIterate) << "%\r" << flush;
+			continue;
+		}
+		globalTotalRolls = 0;
+		globalRoll = initRoll(in.numGreen, in.yellowDie, in.redDie);
+		globalProbs = vector<pair<double, int>>();
 
-	double discardOneProb = throwAwayThread.get();
-	// throwAwayProb thread finished, can launch nth thread
-	threads.push_back(thread(launchThread, tasks, inOrder, numGreen, yellowDie, redDie, numFocus, numSpell, numClue, heldDice));
-	for (thread & t : threads) {
-		if (t.joinable()) {
-			t.join();
+		vector<thread> threads = vector<thread>();
+		threads.push_back(thread(launchThread, tasks, inOrder, in.numGreen, in.yellowDie, in.redDie, in.numFocus, in.numSpell, in.numClue, heldDice, terrorEffect));
+		for (int i = 1; globalRoll.size() > 4 && i < numThreads; i++) {
+			threads.push_back(thread(launchThread, tasks, inOrder, in.numGreen, in.yellowDie, in.redDie, in.numFocus, in.numSpell, in.numClue, heldDice, terrorEffect));
+		}
+		
+		for (thread& t : threads) {
+			if (t.joinable()) {
+				t.join();
+			}
+		}
+
+		success = 0.0;
+		for (pair<double, int> g : globalProbs) {
+			success += (g.first * g.second);
+		}
+		success /= intPow(6, globalRoll.size());
+		saved[key2] = success;
+		if (savedEnabled) {
+			savedFile << key2 << "#" << to_string(success) << endl;
 		}
 	}
-
-	double success = 0.0;
-	for (pair<double, int> g : globalProbs) {
-		success += (g.second * max(discardOneProb, g.first));
-	}
-	success /= intPow(6, globalRoll.size());
-	saved[key] = success;
-	if (savedEnabled) {
-		savedFile << key << "#" << success << endl;
-	}
+	
 	return success;
 }
 
@@ -706,7 +766,7 @@ void printHelp() {
 	cout << "./eldersign --focus 0 --spell 0 --clue 0 --in-file cards.csv --num-threads 1" << endl;
 }
 
-void runTask(string name, string taskStr, int maxFocus, int maxSpell, int maxClue, bool noRange, int numCols) {
+void runTask(string name, string taskStr, int maxFocus, int maxSpell, int maxClue, bool noRange, int numCols, int terrorEffect) {
 	vector<vector<int>> tasks = vector<vector<int>>();
 	bool inOrder = false;
 
@@ -722,27 +782,27 @@ void runTask(string name, string taskStr, int maxFocus, int maxSpell, int maxClu
 				cout << endl << currentLineText << "\r" << flush;
 				if (numCols <= 0) continue;
 				currentLineText += "#";
-				currentLineText += to_string(calcInit(tasks, inOrder, 5, false, false, numFocus, numSpell, numClue) * 100.0);
+				currentLineText += to_string(calcInit(tasks, inOrder, 5, false, false, numFocus, numSpell, numClue, terrorEffect) * 100.0);
 				cout << currentLineText << "\r" << flush;
 				if (numCols <= 1) continue;
 				currentLineText += "#";
-				currentLineText += to_string(calcInit(tasks, inOrder, 6, false, false, numFocus, numSpell, numClue) * 100.0);
+				currentLineText += to_string(calcInit(tasks, inOrder, 6, false, false, numFocus, numSpell, numClue, terrorEffect) * 100.0);
 				cout << currentLineText << "\r" << flush;
 				if (numCols <= 2) continue;
 				currentLineText += "#";
-				currentLineText += to_string(calcInit(tasks, inOrder, 6, true, false, numFocus, numSpell, numClue) * 100.0);
+				currentLineText += to_string(calcInit(tasks, inOrder, 6, true, false, numFocus, numSpell, numClue, terrorEffect) * 100.0);
 				cout << currentLineText << "\r" << flush;
 				if (numCols <= 3) continue;
 				currentLineText += "#";
-				currentLineText += to_string(calcInit(tasks, inOrder, 6, false, true, numFocus, numSpell, numClue) * 100.0);
+				currentLineText += to_string(calcInit(tasks, inOrder, 6, false, true, numFocus, numSpell, numClue, terrorEffect) * 100.0);
 				cout << currentLineText << "\r" << flush;
 				if (numCols <= 4) continue;
 				currentLineText += "#";
-				currentLineText += to_string(calcInit(tasks, inOrder, 6, true, true, numFocus, numSpell, numClue) * 100.0);
+				currentLineText += to_string(calcInit(tasks, inOrder, 6, true, true, numFocus, numSpell, numClue, terrorEffect) * 100.0);
 				cout << currentLineText << "\r" << flush;
 				if (numCols <= 5) continue;
 				currentLineText += "#";
-				currentLineText += to_string(calcInit(tasks, inOrder, 7, true, true, numFocus, numSpell, numClue) * 100.0);
+				currentLineText += to_string(calcInit(tasks, inOrder, 7, true, true, numFocus, numSpell, numClue, terrorEffect) * 100.0);
 				cout << currentLineText << "\r" << flush;
 			}
 		}
@@ -758,6 +818,7 @@ int main(int argc, char** argv) {
 	int maxClue = 0;
 	int numCols = 6;
 	string taskStr = "";
+	string terrorEffect = "NONE";
 
 	int argIdx = 1;
 	while (argIdx < argc) {
@@ -795,6 +856,9 @@ int main(int argc, char** argv) {
 		else if (flag == "--num-threads" && argIdx < argc) {
 			numThreads = stoi(argv[argIdx++]);
 		}
+		else if (flag == "--terror-effect" && argIdx < argc) {
+			terrorEffect = argv[argIdx++];
+		}
 		else if (flag == "--help") {
 			printHelp();
 			return 0;
@@ -812,16 +876,17 @@ int main(int argc, char** argv) {
 	}
 	cout << "Card Title#Tasks#Focus#Spell#Clue#5G#6G#6G+Y#6G+R#6G+YR#6G+YRW";
 	if (taskStr != "") {
-		runTask("OneOff", taskStr, maxFocus, maxSpell, maxClue, noRange, numCols);
+		runTask("OneOff", taskStr, maxFocus, maxSpell, maxClue, noRange, numCols, terrorEffectConv(terrorEffect));
 	}
 	else {
-		io::CSVReader<3, io::trim_chars<' '>, io::double_quote_escape<',', '\"'>> in(filename);
-		in.read_header(io::ignore_extra_column, "Expansion", "Name", "Tasks");
+		io::CSVReader<4, io::trim_chars<' '>, io::double_quote_escape<',', '\"'>> in(filename);
+		in.read_header(io::ignore_extra_column, "Expansion", "Name", "Tasks", "TerrorEffect");
 		string expansion;
 		string name;
+		string terrorEffect;
 
-		while (in.read_row(expansion, name, taskStr)) {
-			runTask(name, taskStr, maxFocus, maxSpell, maxClue, noRange, numCols);
+		while (in.read_row(expansion, name, taskStr, terrorEffect)) {
+			runTask(name, taskStr, maxFocus, maxSpell, maxClue, noRange, numCols, terrorEffectConv(terrorEffect));
 		}
 	}
 

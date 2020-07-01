@@ -70,6 +70,10 @@ const int GREEN = 0;
 const int YELLOW = 1;
 const int RED = 2;
 
+const int NONE = 0;
+const int IMMEDIATE_FAIL = 1;
+const int DISCARD_ALL_TERROR = 2;
+
 int goalConv(string goal) {
 	if (goal == "INV_1") {
 		return INV_1;
@@ -164,6 +168,19 @@ int getInvValue(int inv) {
 		return 11;
 	case INV_12:
 		return 12;
+	}
+	return -1;
+}
+
+int terrorEffectConv(string s) {
+	if (s == "NONE") {
+		return NONE;
+	}
+	else if (s == "IMMEDIATE_FAIL") {
+		return IMMEDIATE_FAIL;
+	}
+	else if (s == "DISCARD_ALL_TERROR") {
+		return DISCARD_ALL_TERROR;
 	}
 	return -1;
 }
