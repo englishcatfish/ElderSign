@@ -73,7 +73,7 @@ void incrRoll(vector<int>& roll) {
 	}
 }
 
-int rollCombinations(vector<int> roll) {
+int rollCombinations(vector<int>& roll) {
 	int numGreen = 0;
 	int counts[6] = { 0,0,0,0,0,0 };
 	for (int i = 0; i < roll.size(); i++) {
@@ -89,7 +89,7 @@ int rollCombinations(vector<int> roll) {
 	return total;
 }
 
-int rollCombinations(vector<int> roll, int mask) {
+int rollCombinations(vector<int>& roll, int mask) {
 	int numGreen = 0;
 	int counts[6] = { 0,0,0,0,0,0 };
 	for (int i = 0; i < roll.size(); i++) {
@@ -152,14 +152,18 @@ string rollToString(vector<int> roll, bool sortRoll) {
 	return s;
 }
 
-int distanceDiff(vector<int> r1, vector<int> r2) {
+int distanceDiff(vector<int>& r1, vector<int>& r2) {
 	int diff = 0;
+	int newMask = 0;
 	for (int i = 0; i < r1.size(); i++) {
 		bool found = false;
 		for (int j = 0; !found && j < r2.size(); j++) {
 			if (r1[i] == r2[j]) {
-				r2[j] = -1;
-				found = true;
+				int p = 1 << j;
+				if ((newMask & p) != p) {
+					newMask += p;
+					found = true;
+				}
 			}
 		}
 		if (!found) {
@@ -169,27 +173,10 @@ int distanceDiff(vector<int> r1, vector<int> r2) {
 	return diff;
 }
 
-int maskDiff(vector<int> r1, vector<int> r2) {
-	int mask = 0;
-	for (int i = 0; i < r1.size(); i++) {
-		mask <<= 1;
-		bool found = false;
-		for (int j = 0; !found && j < r2.size(); j++) {
-			if (r1[i] == r2[j]) {
-				r2[j] = -1;
-				found = true;
-			}
-		}
-		if (!found) {
-			mask++;
-		}
-	}
-	return mask;
-}
-
-int rerollCombinations(vector<int> roll, vector<int> reroll, int mask) {	
+int rerollCombinations(vector<int>& roll, vector<int>& reroll, int mask) {
 	int numGreen = 0;
 	int counts[6] = { 0,0,0,0,0,0 };
+	int newMask = 0;
 	for (int i = 0; i < roll.size(); i++) {
 		int p = 1 << i;
 		if ((mask & p) == p) {
@@ -198,13 +185,17 @@ int rerollCombinations(vector<int> roll, vector<int> reroll, int mask) {
 		bool found = false;
 		for (int j = 0; !found && j < reroll.size(); j++) {
 			if (roll[i] == reroll[j]) {
-				reroll[j] = -1;
-				found = true;
+				p = 1 << j;
+				if ((newMask & p) != p) {
+					newMask += p;
+					found = true;
+				}
 			}
 		}
 	}
 	for (int i = 0; i < reroll.size(); i++) {
-		if (reroll[i] == -1) {
+		int p = 1 << i;
+		if ((newMask & p) == p) {
 			continue;
 		}
 		if (reroll[i] <= 6) {
@@ -212,7 +203,7 @@ int rerollCombinations(vector<int> roll, vector<int> reroll, int mask) {
 			counts[reroll[i] - 1]++;
 		}
 	}
-	
+
 	int total = fac(numGreen);
 	for (int i = 0; i < 6; i++) {
 		total /= fac(counts[i]);
@@ -220,7 +211,8 @@ int rerollCombinations(vector<int> roll, vector<int> reroll, int mask) {
 	return total;
 }
 
-bool maskedReroll(vector<int> roll, vector<int> reroll, int mask) {
+bool maskedReroll(vector<int>& roll, vector<int>& reroll, int mask) {
+	int newMask = 0;
 	for (int i = 0; i < roll.size(); i++) {
 		int p = 1 << i;
 		if ((p & mask) == p) {
@@ -229,8 +221,11 @@ bool maskedReroll(vector<int> roll, vector<int> reroll, int mask) {
 		bool found = false;
 		for (int j = 0; !found && j < reroll.size(); j++) {
 			if (roll[i] == reroll[j]) {
-				reroll[j] = -1;
-				found = true;
+				p = 1 << j;
+				if ((newMask & p) != p) {
+					newMask += p;
+					found = true;
+				}
 			}
 		}
 		if (!found) {

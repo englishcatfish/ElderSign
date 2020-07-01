@@ -38,7 +38,7 @@
 
 using namespace std;
 
-string serializeTasks(vector<vector<int>> tasks, bool inOrder) {
+string serializeTasks(vector<vector<int>>& tasks, bool inOrder) {
 	string str = "";
 	for (int i = 0; i < tasks.size(); i++) {
 		if (i > 0) {
@@ -54,7 +54,7 @@ string serializeTasks(vector<vector<int>> tasks, bool inOrder) {
 	return str;
 }
 
-string serialize(vector<vector<int>> tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect) {
+string serialize(vector<vector<int>>& tasks, bool inOrder, int numGreen, bool yellowDie, bool redDie, int numFocus, int numSpell, int numClue, vector<int> heldDice, int terrorEffect) {
 	sort(heldDice.begin(), heldDice.end());
 	string heldStr = to_string(numFocus) + ":" + to_string(numSpell) + ":" + to_string(numClue) + ":";
 	for (int i = 0; i < heldDice.size(); i++) {
