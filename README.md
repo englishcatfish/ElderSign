@@ -12,7 +12,7 @@ Scenarios:
 ## Compile
 Compile with your favorite c++ compiler.
 
-E.g., `clang++-10 ElderSign.cpp -pthread -O3 -o eldersign`
+E.g., `clang++-10 ElderSign.cpp -pthread -std=c++11 -O3 -o eldersign`
 
 ## Run
 
