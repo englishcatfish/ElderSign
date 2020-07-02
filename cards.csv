@@ -28,7 +28,7 @@ Core,The Hedge Maze,"INV_2,PERIL|PERIL,PERIL",NONE
 Core,The Hidden Passage,"INV_3>PERIL,INV_3>SCROLL",NONE
 Core,Blood On The Floor,"INV_2>INV_3>TERROR,PERIL",NONE
 Core,The Storage Closet,"INV_3>INV_3>SCROLL,SCROLL",NONE
-Core,Something Has Broken Free,"PERIL|TERROR,TERROR",NONE
+Core,Something Has Broken Free,"PERIL|TERROR,TERROR",IMMEDIATE_FAIL
 Core,Administration Office,SCROLL|INV_9,NONE
 Core,The Archives,"SCROLL|SCROLL,INV_3|SCROLL,PERIL",NONE
 Core,Riot In The Streets,INV_3>INV_9,NONE
@@ -41,7 +41,7 @@ Core,A Terrible Discovery,"INV_3,TERROR|SCROLL,SCROLL",NONE
 Core,We Need to Find Help,"PERIL,PERIL,SCROLL,INV_3",NONE
 Core,Medusa Exhibit,TERROR>SCROLL>INV_7,DISCARD_ALL_TERROR
 Core,Please Do Not Touch the Exhibits,"TERROR,TERROR|PERIL,PERIL",NONE
-Core,Remians of the High Priest,"PERIL|SCROLL,INV_6",DISCARD_ALL_TERROR
+Core,Remains of the High Priest,"PERIL|SCROLL,INV_6",DISCARD_ALL_TERROR
 Core,Tempest in a Teapot,"INV_4>TERROR>PERIL,SCROLL",NONE
 Core,Mysterious Tome,"INV_3,TERROR|SCROLL,SCROLL",NONE
 Core,The Key to the Beyond,"INV_3>SCROLL,PERIL,INV_2",NONE
@@ -150,7 +150,7 @@ Omens of Ice,Cabin Fever,INV_2|SCROLL|TERROR,NONE
 Omens of Ice,Private Collection,"INV_3,TERROR+SCROLL|INV_2,SCROLL",NONE
 Omens of Ice,Food Shortage,"INV_3,PERIL|INV_4",NONE
 Omens of Ice,White Out,"INV_2|PERIL|TERROR,SCROLL",NONE
-Omens of Ice,Northern Tales,"TERROR+SCROLL,TERROR+SCROLL|TERROR+PERIL,TERROR|PERIL",NONE
+Omens of Ice,Northern Tales,"TERROR+SCROLL,TERROR+SCROLL|TERROR+PERIL,TERROR+PERIL",NONE
 Omens of Ice,Frozen,"INV_2,PERIL,SCROLL",NONE
 Omens of Ice,Obsessive Greed,"INV_3,TERROR|INV_3,PERIL",NONE
 Omens of Ice,Through the Ice,"INV_4|PERIL,PERIL",NONE
@@ -291,3 +291,83 @@ Omens of the Deep,Unbound Nightmare,"TERROR+SCROLL,TERROR+SCROLL|INV_5,PERIL",NO
 Omens of the Deep,Oppressive Silence,"INV_4,PERIL,PERIL",NONE
 Omens of the Deep,Crystal of the Elder Things,"INV_3,SCROLL|PERIL|INV_1",NONE
 Omens of the Deep,Echoes of the Past,"INV_2,INV_1>INV_2,SCROLL",NONE
+Gates of Arkham,Registration Day,INV_2|INV_3,NONE
+Gates of Arkham,Foul Faculty,"INV_2,TERROR|TERROR",NONE
+Gates of Arkham,The Dean,"INV_2,SCROLL,SCROLL",NONE
+Gates of Arkham,The Lecture,INV_3>SCROLL>INV_4,NONE
+Gates of Arkham,Alien Dissection,"TERROR>INV_2>INV_3,SCROLL+PERIL",NONE
+Gates of Arkham,The Machine,"INV_2,TERROR+SCROLL,TERROR+SCROLL>INV_2,SCROLL+TERROR",NONE
+Gates of Arkham,Exhaustive Research Task A,INV_8,NONE
+Gates of Arkham,Exhaustive Research Task B,"INV_8,SCROLL",NONE
+Gates of Arkham,Exhaustive Research Task C,"INV_10,SCROLL",NONE
+Gates of Arkham,Archaic Collection,"INV_5,SCROLL,SCROLL|SCROLL",NONE
+Gates of Arkham,The Black Tome,"SCROLL,TERROR|SCROLL,SCROLL,INV_4",NONE
+Gates of Arkham,Psychiatric Assistance,"INV_1,INV_2|INV_3",NONE
+Gates of Arkham,Ramblings of the Mad,"INV_1|INV_2,SCROLL",NONE
+Gates of Arkham,Mad Experiments,INV_2>INV_2>PERIL,NONE
+Gates of Arkham,Financial Backers,"INV_2|INV_2|INV_2,INV_2",NONE
+Gates of Arkham,Strange Heirloom,"INV_3|SCROLL,INV_3",NONE
+Gates of Arkham,Bank Robbery,"INV_1|INV_3,PERIL|PERIL",NONE
+Gates of Arkham,A Play in the Park,"TERROR,TERROR,SCROLL|TERROR,SCROLL",NONE
+Gates of Arkham,Gypsy Curse,"TERROR|SCROLL|SCROLL,SCROLL",NONE
+Gates of Arkham,Founder's Rock,"INV_3|INV_5,TERROR|SCROLL,TERROR",NONE
+Gates of Arkham,Arrested,"PERIL|INV_2,INV_2",NONE
+Gates of Arkham,Police Assistance,INV_2|TERROR|PERIL,NONE
+Gates of Arkham,Cold Case,"INV_2,TERROR|INV_2,SCROLL",NONE
+Gates of Arkham,A Warm Meal,INV_2|INV_2,NONE
+Gates of Arkham,Late Night Visitor,"TERROR|TERROR,PERIL|PERIL",NONE
+Gates of Arkham,Booth in the Back,"INV_3|SCROLL|SCROLL,TERROR",NONE
+Gates of Arkham,Police Raid,"INV_2,PERIL|INV_3,PERIL,PERIL",NONE
+Gates of Arkham,Dark Dealings,"PERIL|INV_3,INV_3,SCROLL",NONE
+Gates of Arkham,Back Alley Battle,"TERROR+PERIL,TERROR+PERIL,PERIL|PERIL",NONE
+Gates of Arkham,Initiation into the Mysteries,"INV_3,SCROLL>INV_2>INV_1",NONE
+Gates of Arkham,Private Meetings,"INV_2|INV_3,SCROLL,SCROLL",NONE
+Gates of Arkham,Inner Sanctum,"INV_2,SCROLL>SCROLL>SCROLL+PERIL,TERROR+SCROLL",NONE
+Gates of Arkham,Strange Lights,"INV_2,SCROLL,TERROR|INV_3,PERIL",NONE
+Gates of Arkham,Rats in the Walls,"INV_3|INV_2,TERROR,TERROR",NONE
+Gates of Arkham,The Forbidden Library,"INV_3,TERROR,TERROR>SCROLL,SCROLL",NONE
+Gates of Arkham,Death at the Docks,"INV_3,TERROR|SCROLL,PERIL",NONE
+Gates of Arkham,Prisoner of a Madman,"PERIL|INV_5,TERROR",NONE
+Gates of Arkham,Deep Ones Emerge,"PERIL|TERROR,PERIL",NONE
+Gates of Arkham,Standing Stones,"INV_3,SCROLL,TERROR",NONE
+Gates of Arkham,Blood Sacrifice,"TERROR,PERIL|PERIL,PERIL",NONE
+Gates of Arkham,Stormy Crossing,"INV_3,TERROR,PERIL",IMMEDIATE_FAIL
+Gates of Arkham,Run For Your Lives,"PERIL,TERROR,SCROLL>TERROR+PERIL",NONE
+Gates of Arkham,Growing Terror,"TERROR,TERROR|TERROR",NONE
+Gates of Arkham,Thing in the Basement,"INV_2,TERROR+PERIL,TERROR+PERIL|SCROLL,TERROR+PERIL,TERROR+PERIL",NONE
+Gates of Arkham,Ink Blots,INV_1|INV_2|TERROR,NONE
+Gates of Arkham,Pursuing Leads,INV_1>INV_2>INV_3,NONE
+Gates of Arkham,Cryptic Messages,"INV_1|INV_4,SCROLL",NONE
+Gates of Arkham,Late Arrivals,"INV_3|INV_3,INV_3",NONE
+Gates of Arkham,Abandoned Crate,"INV_2>INV_3>TERROR,PERIL",NONE
+Gates of Arkham,Thing on the Train,"PERIL|TERROR,PERIL",NONE
+Gates of Arkham,The Ornate Chest,"INV_1,SCROLL,SCROLL|INV_2,TERROR,PERIL",NONE
+Gates of Arkham,The Psychic Skull,"SCROLL,SCROLL|SCROLL|SCROLL",NONE
+Gates of Arkham,Curiosity Kills,"INV_3,SCROLL|TERROR,PERIL,PERIL",NONE
+Gates of Arkham,Wheeling and Dealing,"INV_2,INV_2",NONE
+Gates of Arkham,Breaking and Entering,"INV_2|PERIL,PERIL",NONE
+Gates of Arkham,Shipment from Innsmouth,TERROR>PERIL,NONE
+Gates of Arkham,Grave Robbing,"INV_2,PERIL>TERROR",NONE
+Gates of Arkham,Open Graves,"INV_2,TERROR,PERIL,SCROLL",NONE
+Gates of Arkham,Necromatic Rites,"TERROR,PERIL|SCROLL,PERIL",NONE
+Gates of Arkham,Faceless Terrors,"INV_2|INV_2,TERROR,TERROR,SCROLL",IMMEDIATE_FAIL
+Gates of Arkham,Lost in the Dark,"INV_1,TERROR,PERIL>INV_2,INV_2",NONE
+Gates of Arkham,Altar in the Deep,"INV_2,INV_2,TERROR|PERIL,SCROLL,SCROLL",NONE
+Gates of Arkham,Chat with the Father,"INV_2|INV_2,SCROLL",NONE
+Gates of Arkham,Prayers for the Lost,"INV_1|INV_1|INV_1,INV_2",NONE
+Gates of Arkham,Sanctification,"SCROLL|SCROLL,SCROLL",NONE
+Gates of Arkham,Roughed Up,"PERIL|INV_2,PERIL",NONE
+Gates of Arkham,A Terrified Guest,"INV_2|SCROLL,SCROLL,TERROR",NONE
+Gates of Arkham,Room Thirteen,INV_10,NONE
+Gates of Arkham,Ancient Scripts,"INV_2,SCROLL,SCROLL|SCROLL,SCROLL",NONE
+Gates of Arkham,Lessons from the Past,"SCROLL|INV_4,SCROLL,SCROLL",NONE
+Gates of Arkham,A Night in the Museum,"INV_2,INV_2,SCROLL>INV_2,PERIL,TERROR",NONE
+Gates of Arkham,Emergency Care,"INV_2,INV_2",NONE
+Gates of Arkham,Gruesome Autopsy,"INV_1,TERROR+PERIL",NONE
+Gates of Arkham,Last Words,INV_2|INV_2|INV_3,NONE
+Gates of Arkham,Lure of the Unknown,INV_9,NONE
+Gates of Arkham,Magical Mishaps,"SCROLL,SCROLL,SCROLL|TERROR",NONE
+Gates of Arkham,Chants and Incantations,"INV_3>SCROLL,SCROLL>TERROR",NONE
+Gates of Arkham,Lost in the Brambles,"INV_2,INV_2,TERROR>INV_2,PERIL",NONE
+Gates of Arkham,Moonshine by Moonlight,"INV_2|PERIL,PERIL|INV_3,PERIL",NONE
+Gates of Arkham,The Coven,"INV_8,TERROR,PERIL",NONE
